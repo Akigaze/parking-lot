@@ -87,4 +87,20 @@ public class ParkingLotTest {
 
         assertThat(result, is(false));
     }
+
+    @Test
+    public void should_a_car_be_parked_again_successfully_after_taking_out(){
+        ParkingLot parkingLot=new ParkingLot(1);
+        Car car=new Car();
+        ParkingCard card=parkingLot.park(car);
+
+        parkingLot.unpark(card);
+
+        try {
+            parkingLot.park(car);
+        }catch (ParkingLotFullException exception){
+            fail("Can't Park Again.");
+        }
+
+    }
 }
