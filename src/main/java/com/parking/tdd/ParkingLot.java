@@ -13,7 +13,6 @@ public class ParkingLot {
     }
 
     public ParkingCard park(Car car) {
-        //throw new ParkingLotFullException();
         if (emptySiteNum==0){
             throw new ParkingLotFullException();
         }else {
