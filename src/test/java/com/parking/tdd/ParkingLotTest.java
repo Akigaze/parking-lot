@@ -1,6 +1,7 @@
 package com.parking.tdd;
 
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -28,5 +29,16 @@ public class ParkingLotTest {
         }catch (ParkingLotFullException exception){
 
         }
+    }
+
+    @Test
+    public void should_get_a_car_when_give_a_right_card(){
+        ParkingLot parkingLot=new ParkingLot(2);
+        Car car1=new Car();
+        ParkingCard card=parkingLot.park(car1);
+
+        Car car=parkingLot.unpark(card);
+
+        Assertions.assertEquals(car1,car);
     }
 }
