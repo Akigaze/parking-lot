@@ -3,7 +3,11 @@ package com.parking.tdd;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.fail;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
+import static org.mockito.Mockito.mock;
 
 public class ParkingLotTest {
     @Test
@@ -40,5 +44,16 @@ public class ParkingLotTest {
         Car car=parkingLot.unpark(card);
 
         Assertions.assertEquals(car1,car);
+    }
+
+    @Test
+    public void should_get_a_car_when_give_a_wrong_card(){
+        ParkingLot parkingLot=new ParkingLot(2);
+        Car car=new Car();
+        ParkingCard card=parkingLot.park(car);
+
+        ParkingCard anotherCard=new ParkingCard();
+
+        assertThat(parkingLot.unpark(anotherCard), not(car));
     }
 }
