@@ -7,6 +7,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
+import static org.mockito.Mockito.calls;
 import static org.mockito.Mockito.mock;
 
 public class ParkingLotTest {
@@ -71,6 +72,16 @@ public class ParkingLotTest {
     @Test
     public void should_be_false_call_isFull_when_parking_lot_is_not_full(){
         ParkingLot parkingLot=new ParkingLot(1);
+
+        boolean result=parkingLot.isFull();
+
+        assertThat(result, is(false));
+    }
+    @Test
+    public void should_be_false_call_isFull_after_take_out_a_car(){
+        ParkingLot parkingLot=new ParkingLot(1);
+        ParkingCard card=parkingLot.park(new Car());
+        parkingLot.unpark(card);
 
         boolean result=parkingLot.isFull();
 
