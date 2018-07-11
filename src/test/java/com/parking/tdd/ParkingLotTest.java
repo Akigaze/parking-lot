@@ -15,4 +15,18 @@ public class ParkingLotTest {
             fail("The Parking Lot is Full.");
         }
     }
+
+    @Test
+    public void should_park_failly_when_parking_lot_is_full(){
+        ParkingLot parkingLot=new ParkingLot(1);
+        parkingLot.park(new Car());
+
+        Car car=new Car();
+        try {
+            parkingLot.park(car);
+            fail("The Parking Lot is Full.");
+        }catch (ParkingLotFullException exception){
+
+        }
+    }
 }

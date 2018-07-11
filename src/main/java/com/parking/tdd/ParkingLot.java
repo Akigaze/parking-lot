@@ -9,9 +9,10 @@ public class ParkingLot {
     }
 
     public void park(Car car) {
-        emptySiteNum--;
         if (emptySiteNum==0){
             throw new ParkingLotFullException();
+        }else {
+            emptySiteNum--;
         }
     }
 }
