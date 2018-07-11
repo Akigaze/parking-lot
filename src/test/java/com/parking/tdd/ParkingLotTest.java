@@ -56,4 +56,15 @@ public class ParkingLotTest {
 
         assertThat(parkingLot.unpark(anotherCard), not(car));
     }
+
+    @Test
+    public void should_be_true_call_isFull_when_parking_lot_is_full(){
+        ParkingLot parkingLot=new ParkingLot(1);
+        Car car=new Car();
+        ParkingCard card=parkingLot.park(car);
+
+        boolean result=parkingLot.isFull();
+
+        assertThat(result, is(true));
+    }
 }
