@@ -20,7 +20,7 @@ public class ParkingBoy {
 
     public Car unPark(ParkingCard card) {
         for (ParkingLot lot:parkingLotList){
-            if(lot.getParkedCars().containsKey(card)){
+            if(lot.containsParkingCard(card)){
                 return lot.unpark(card);
             }
         }

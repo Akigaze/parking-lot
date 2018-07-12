@@ -33,5 +33,8 @@ public class ParkingLot {
     public Map<ParkingCard,Car> getParkedCars() {
         return this.parkedCars;
     }
+    public boolean containsParkingCard(ParkingCard card){
+        return parkedCars.containsKey(card);
+    }
 
 }
