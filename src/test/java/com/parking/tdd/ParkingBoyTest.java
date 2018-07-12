@@ -68,4 +68,21 @@ public class ParkingBoyTest {
 
         assertThat(boy.unParking(card),is(car));
     }
+
+    @Test
+    public void should_get_the_specific_car_from_many_cars_in_more_than_a_parking_lots_by_call_unPark_when_give_a_right_parking_card(){
+        List<ParkingLot> parkingLotList=new ArrayList<>();
+        parkingLotList.add(new ParkingLot(1,1));
+        parkingLotList.add(new ParkingLot(2,2));
+        ParkingBoy boy=new ParkingBoy(parkingLotList);
+
+        Car car1=new Car();
+        Car car2=new Car();
+        ParkingCard card1=boy.park(car1);
+        ParkingCard card2=boy.park(car2);
+
+        assertThat(boy.unParking(card1),is(car1));
+        assertThat(boy.unParking(card2),is(car2));
+
+    }
 }

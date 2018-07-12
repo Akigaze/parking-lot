@@ -19,6 +19,11 @@ public class ParkingBoy {
     }
 
     public Car unParking(ParkingCard card) {
-        return parkingLotList.get(0).unpark(card);
+        for (ParkingLot lot:parkingLotList){
+            if(lot.getLotId()==card.getLotId()){
+                return lot.unpark(card);
+            }
+        }
+        return null;
     }
 }
