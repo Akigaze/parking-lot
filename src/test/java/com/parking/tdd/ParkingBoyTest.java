@@ -85,4 +85,21 @@ public class ParkingBoyTest {
         assertThat(boy.unParking(card2),is(car2));
 
     }
+
+    @Test
+    public void should_failly__by_call_unPark_when_give_a_wrong_parking_card(){
+        List<ParkingLot> parkingLotList=new ArrayList<>();
+        parkingLotList.add(new ParkingLot(1,1));
+        parkingLotList.add(new ParkingLot(2,2));
+        ParkingBoy boy=new ParkingBoy(parkingLotList);
+
+        Car car1=new Car();
+        Car car2=new Car();
+        ParkingCard card1=boy.park(car1);
+        ParkingCard card2=boy.park(car2);
+
+        assertThat(boy.unParking(card2),not(car1));
+        assertThat(boy.unParking(card1),not(car2));
+
+    }
 }
