@@ -120,4 +120,23 @@ public class ParkingBoyTest {
             fail("All My Parking Lots Are Full!");
         }
     }
+
+    @Test
+    public void should_park_by_order_when_call_park(){
+        List<ParkingLot> parkingLotList=new ArrayList<>();
+        ParkingLot lot1=new ParkingLot(1,1);
+        ParkingLot lot2=new ParkingLot(2,1);
+        parkingLotList.add(lot1);
+        parkingLotList.add(lot2);
+        ParkingBoy boy=new ParkingBoy(parkingLotList);
+
+        Car car1=new Car();
+        Car car2=new Car();
+        ParkingCard card1=boy.park(car1);
+        ParkingCard card2=boy.park(car2);
+
+        assertThat(lot1.getParkedCars().containsValue(car1),is(true));
+        assertThat(lot2.getParkedCars().containsValue(car2),is(true));
+
+    }
 }

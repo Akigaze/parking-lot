@@ -1,6 +1,7 @@
 package com.parking.tdd;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ParkingLot {
@@ -37,5 +38,9 @@ public class ParkingLot {
 
     public int getLotId() {
         return this.lotId;
+    }
+
+    public Map<ParkingCard,Car> getParkedCars() {
+        return this.parkedCars;
     }
 }
