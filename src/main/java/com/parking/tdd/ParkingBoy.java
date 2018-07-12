@@ -18,7 +18,7 @@ public class ParkingBoy {
         throw new AllParkingLotsFullException();
     }
 
-    public Car unParking(ParkingCard card) {
+    public Car unPark(ParkingCard card) {
         for (ParkingLot lot:parkingLotList){
             if(lot.getLotId()==card.getLotId()){
                 return lot.unpark(card);

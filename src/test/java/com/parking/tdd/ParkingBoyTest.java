@@ -66,7 +66,7 @@ public class ParkingBoyTest {
         Car car=new Car();
         ParkingCard card=boy.park(car);
 
-        assertThat(boy.unParking(card),is(car));
+        assertThat(boy.unPark(card),is(car));
     }
 
     @Test
@@ -81,8 +81,8 @@ public class ParkingBoyTest {
         ParkingCard card1=boy.park(car1);
         ParkingCard card2=boy.park(car2);
 
-        assertThat(boy.unParking(card1),is(car1));
-        assertThat(boy.unParking(card2),is(car2));
+        assertThat(boy.unPark(card1),is(car1));
+        assertThat(boy.unPark(card2),is(car2));
 
     }
 
@@ -98,8 +98,26 @@ public class ParkingBoyTest {
         ParkingCard card1=boy.park(car1);
         ParkingCard card2=boy.park(car2);
 
-        assertThat(boy.unParking(card2),not(car1));
-        assertThat(boy.unParking(card1),not(car2));
+        assertThat(boy.unPark(card2),not(car1));
+        assertThat(boy.unPark(card1),not(car2));
+    }
 
+    @Test
+    public void should_successfully_call_park_again_when_take_out_a_car(){
+        List<ParkingLot> parkingLotList=new ArrayList<>();
+        parkingLotList.add(new ParkingLot(1,1));
+        parkingLotList.add(new ParkingLot(2,2));
+        ParkingBoy boy=new ParkingBoy(parkingLotList);
+
+        Car car1=new Car();
+        Car car2=new Car();
+        ParkingCard card1=boy.park(car1);
+        boy.unPark(card1);
+
+        try {
+            boy.park(car2);
+        }catch (AllParkingLotsFullException exception){
+            fail("All My Parking Lots Are Full!");
+        }
     }
 }
