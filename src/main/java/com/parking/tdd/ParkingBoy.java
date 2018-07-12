@@ -9,7 +9,7 @@ public class ParkingBoy {
         this.parkingLotList=parkingLotList;
     }
 
-    public ParkingCard park(Car car) throws AllParkingLotsFullException {
+    public ParkingCard park(Car car) {
         for (ParkingLot lot:parkingLotList){
             if (!lot.isFull()){
                 return lot.park(car);
