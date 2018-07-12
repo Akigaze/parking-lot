@@ -3,6 +3,9 @@ package com.parking.tdd;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.hamcrest.CoreMatchers.is;
@@ -103,4 +106,6 @@ public class ParkingLotTest {
         }
 
     }
+
+
 }
