@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ParkingLot {
-    private int lotId;
     private int capacity;
     private Map<ParkingCard,Car> parkedCars=new HashMap<>();
 
@@ -13,14 +12,9 @@ public class ParkingLot {
         this.capacity = capacity;
     }
 
-    public ParkingLot(int lotId, int capacity) {
-        this.lotId=lotId;
-        this.capacity=capacity;
-    }
-
     public ParkingCard park(Car car) {
         if (parkedCars.size()<capacity){
-            ParkingCard card=new ParkingCard(this.lotId);
+            ParkingCard card=new ParkingCard();
             parkedCars.put(card,car);
             return card;
         }else {
@@ -36,11 +30,8 @@ public class ParkingLot {
         return parkedCars.size()==capacity;
     }
 
-    public int getLotId() {
-        return this.lotId;
-    }
-
     public Map<ParkingCard,Car> getParkedCars() {
         return this.parkedCars;
     }
+
 }

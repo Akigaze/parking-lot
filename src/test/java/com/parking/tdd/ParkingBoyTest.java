@@ -72,8 +72,8 @@ public class ParkingBoyTest {
     @Test
     public void should_get_the_specific_car_from_many_cars_in_more_than_a_parking_lots_by_call_unPark_when_give_a_right_parking_card(){
         List<ParkingLot> parkingLotList=new ArrayList<>();
-        parkingLotList.add(new ParkingLot(1,1));
-        parkingLotList.add(new ParkingLot(2,2));
+        parkingLotList.add(new ParkingLot(1));
+        parkingLotList.add(new ParkingLot(2));
         ParkingBoy boy=new ParkingBoy(parkingLotList);
 
         Car car1=new Car();
@@ -89,8 +89,8 @@ public class ParkingBoyTest {
     @Test
     public void should_failly__by_call_unPark_when_give_a_wrong_parking_card(){
         List<ParkingLot> parkingLotList=new ArrayList<>();
-        parkingLotList.add(new ParkingLot(1,1));
-        parkingLotList.add(new ParkingLot(2,2));
+        parkingLotList.add(new ParkingLot(1));
+        parkingLotList.add(new ParkingLot(2));
         ParkingBoy boy=new ParkingBoy(parkingLotList);
 
         Car car1=new Car();
@@ -105,8 +105,8 @@ public class ParkingBoyTest {
     @Test
     public void should_successfully_call_park_again_when_take_out_a_car(){
         List<ParkingLot> parkingLotList=new ArrayList<>();
-        parkingLotList.add(new ParkingLot(1,1));
-        parkingLotList.add(new ParkingLot(2,2));
+        parkingLotList.add(new ParkingLot(1));
+        parkingLotList.add(new ParkingLot(2));
         ParkingBoy boy=new ParkingBoy(parkingLotList);
 
         Car car1=new Car();
@@ -124,8 +124,8 @@ public class ParkingBoyTest {
     @Test
     public void should_park_by_order_when_call_park(){
         List<ParkingLot> parkingLotList=new ArrayList<>();
-        ParkingLot lot1=new ParkingLot(1,1);
-        ParkingLot lot2=new ParkingLot(2,1);
+        ParkingLot lot1=new ParkingLot(1);
+        ParkingLot lot2=new ParkingLot(1);
         parkingLotList.add(lot1);
         parkingLotList.add(lot2);
         ParkingBoy boy=new ParkingBoy(parkingLotList);
@@ -137,6 +137,27 @@ public class ParkingBoyTest {
 
         assertThat(lot1.getParkedCars().containsValue(car1),is(true));
         assertThat(lot2.getParkedCars().containsValue(car2),is(true));
+    }
 
+    @Test
+    public void should_park_the_car_to_lot1_by_call_park_when_lot2_is_full_while_lot1_is_not_full(){
+        List<ParkingLot> parkingLotList=new ArrayList<>();
+        ParkingLot lot1=new ParkingLot(1);
+        ParkingLot lot2=new ParkingLot(1);
+        parkingLotList.add(lot1);
+        parkingLotList.add(lot2);
+        ParkingBoy boy=new ParkingBoy(parkingLotList);
+
+        Car car1=new Car();
+        Car car2=new Car();
+        Car car3=new Car();
+        ParkingCard card1=boy.park(car1);
+        boy.park(car2);
+
+        boy.unPark(card1);
+        boy.park(car3);
+
+        assertThat(lot1.getParkedCars().containsValue(car3),is(true));
+        assertThat(lot2.getParkedCars().containsValue(car2),is(true));
     }
 }
