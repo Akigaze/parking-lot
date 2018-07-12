@@ -20,4 +20,19 @@ public class ParkingBoyTest {
             fail("All My Parking Lots Are Full!");
         }
     }
+
+    @Test
+    public void should_park_successfully_the_second_parking_lot_is_not_full(){
+        List<ParkingLot> parkingLotList=new ArrayList<>();
+        parkingLotList.add(new ParkingLot(0));
+        parkingLotList.add(new ParkingLot(2));
+
+        ParkingBoy boy=new ParkingBoy(parkingLotList);
+        Car car=new Car();
+        try{
+            boy.park(car);
+        }catch (AllParkingLotsFullException exception){
+            fail("All My Parking Lots Are Full!");
+        }
+    }
 }

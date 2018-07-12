@@ -10,7 +10,11 @@ public class ParkingBoy {
     }
 
     public ParkingCard park(Car car) throws AllParkingLotsFullException {
-        parkingLotList.get(0).park(car);
-        return null;
+        for (ParkingLot lot:parkingLotList){
+            if (!lot.isFull()){
+                return lot.park(car);
+            }
+        }
+        throw new AllParkingLotsFullException();
     }
 }
