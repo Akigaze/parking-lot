@@ -12,6 +12,10 @@ public class ParkingLot {
         this.capacity = capacity;
     }
 
+    public Map<ParkingCard,Car> getParkedCars() {
+        return this.parkedCars;
+    }
+
     public ParkingCard park(Car car) {
         if (parkedCars.size()<capacity){
             ParkingCard card=new ParkingCard();
@@ -30,9 +34,6 @@ public class ParkingLot {
         return parkedCars.size()==capacity;
     }
 
-    public Map<ParkingCard,Car> getParkedCars() {
-        return this.parkedCars;
-    }
     public boolean containsParkingCard(ParkingCard card){
         return parkedCars.containsKey(card);
     }

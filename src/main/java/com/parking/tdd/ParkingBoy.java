@@ -18,12 +18,12 @@ public class ParkingBoy {
         throw new AllParkingLotsFullException();
     }
 
-    public Car unPark(ParkingCard card) {
+    public Car unPark(ParkingCard card){
         for (ParkingLot lot:parkingLotList){
             if(lot.containsParkingCard(card)){
                 return lot.unpark(card);
             }
         }
-        return null;
+        throw new InvalidParkingCardException();
     }
 }

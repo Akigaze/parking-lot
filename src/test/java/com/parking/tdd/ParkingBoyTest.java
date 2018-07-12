@@ -61,12 +61,13 @@ public class ParkingBoyTest {
     public void should_get_a_car_by_call_unPark_when_give_a_right_parking_card(){
         List<ParkingLot> parkingLotList=new ArrayList<>();
         parkingLotList.add(new ParkingLot(1));
-
         ParkingBoy boy=new ParkingBoy(parkingLotList);
         Car car=new Car();
+
         ParkingCard card=boy.park(car);
 
         assertThat(boy.unPark(card),is(car));
+
     }
 
     @Test
@@ -84,10 +85,11 @@ public class ParkingBoyTest {
         assertThat(boy.unPark(card1),is(car1));
         assertThat(boy.unPark(card2),is(car2));
 
+
     }
 
     @Test
-    public void should_failly__by_call_unPark_when_give_a_wrong_parking_card(){
+    public void should_be_a_different_car__by_call_unPark_when_give_a_wrong_parking_card(){
         List<ParkingLot> parkingLotList=new ArrayList<>();
         parkingLotList.add(new ParkingLot(1));
         parkingLotList.add(new ParkingLot(2));
@@ -100,10 +102,11 @@ public class ParkingBoyTest {
 
         assertThat(boy.unPark(card2),not(car1));
         assertThat(boy.unPark(card1),not(car2));
+
     }
 
     @Test
-    public void should_successfully_call_park_again_when_take_out_a_car(){
+    public void should_be_successful_call_park_again_when_take_out_a_car(){
         List<ParkingLot> parkingLotList=new ArrayList<>();
         parkingLotList.add(new ParkingLot(1));
         parkingLotList.add(new ParkingLot(2));
@@ -112,6 +115,7 @@ public class ParkingBoyTest {
         Car car1=new Car();
         Car car2=new Car();
         ParkingCard card1=boy.park(car1);
+
         boy.unPark(card1);
 
         try {
@@ -154,10 +158,37 @@ public class ParkingBoyTest {
         ParkingCard card1=boy.park(car1);
         boy.park(car2);
 
-        boy.unPark(card1);
+        try {
+            boy.unPark(card1);
+        } catch (InvalidParkingCardException e) {
+
+        }
         boy.park(car3);
 
         assertThat(lot1.getParkedCars().containsValue(car3),is(true));
         assertThat(lot2.getParkedCars().containsValue(car2),is(true));
+    }
+
+    @Test
+    public void should_be_fail_by_call_unPark_when_give_a_invalid_parking_card(){
+        List<ParkingLot> parkingLotList=new ArrayList<>();
+        ParkingLot lot1=new ParkingLot(1);
+        ParkingLot lot2=new ParkingLot(1);
+        parkingLotList.add(lot1);
+        parkingLotList.add(lot2);
+        ParkingBoy boy=new ParkingBoy(parkingLotList);
+
+        Car car1=new Car();
+        Car car2=new Car();
+        boy.park(car1);
+        boy.park(car2);
+
+        try {
+            boy.unPark(new ParkingCard());
+            fail("The Parking Card Is Invalid!");
+        }catch (InvalidParkingCardException exception){
+
+        }
+
     }
 }
