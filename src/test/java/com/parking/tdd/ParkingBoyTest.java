@@ -5,7 +5,10 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.fail;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 
 public class ParkingBoyTest {
     @Test
@@ -52,5 +55,17 @@ public class ParkingBoyTest {
         }catch (AllParkingLotsFullException exception){
 
         }
+    }
+
+    @Test
+    public void should_get_a_car_by_call_unPark_when_give_a_right_parking_card(){
+        List<ParkingLot> parkingLotList=new ArrayList<>();
+        parkingLotList.add(new ParkingLot(1));
+
+        ParkingBoy boy=new ParkingBoy(parkingLotList);
+        Car car=new Car();
+        ParkingCard card=boy.park(car);
+
+        assertThat(boy.unParking(card),is(car));
     }
 }

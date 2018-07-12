@@ -17,4 +17,8 @@ public class ParkingBoy {
         }
         throw new AllParkingLotsFullException();
     }
+
+    public Car unParking(ParkingCard card) {
+        return parkingLotList.get(0).unpark(card);
+    }
 }
