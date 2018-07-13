@@ -4,6 +4,7 @@ import com.parking.tdd.core.Car;
 import com.parking.tdd.core.ParkingBoy;
 import com.parking.tdd.core.ParkingCard;
 import com.parking.tdd.core.exception.AllParkingLotsFullException;
+import com.parking.tdd.core.exception.InvalidParkingCardException;
 import com.parking.tdd.view.ViewListener;
 
 public class ParkingController {
@@ -43,6 +44,8 @@ public class ParkingController {
             }
         }catch (AllParkingLotsFullException exception){
             listener.send("车已停满，请晚点再来");
+        }catch (InvalidParkingCardException exception){
+            listener.send("非法小票，无法取出车，请查证后再输");
         }
 
     }

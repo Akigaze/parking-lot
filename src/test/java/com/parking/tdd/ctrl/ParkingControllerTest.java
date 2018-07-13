@@ -4,6 +4,7 @@ import com.parking.tdd.core.Car;
 import com.parking.tdd.core.ParkingBoy;
 import com.parking.tdd.core.ParkingCard;
 import com.parking.tdd.core.exception.AllParkingLotsFullException;
+import com.parking.tdd.core.exception.InvalidParkingCardException;
 import com.parking.tdd.view.ViewListener;
 import org.junit.Test;
 
@@ -127,5 +128,25 @@ public class ParkingControllerTest {
         //then
         controller.start();
         verify(listener).send("车已停满，请晚点再来");
+    }
+
+    @Test
+    public void should_pick_a_car_failly_when_give_a_invalid_parking_card_number() {
+        //give
+        ViewListener listener = mock(ViewListener.class);
+        ParkingBoy boy = mock(ParkingBoy.class);
+        ParkingController controller = new ParkingController(listener, boy);
+        String cardId = UUID.randomUUID().toString();
+        Car car = new Car("1234");
+        ParkingCard card = new ParkingCard(cardId);
+
+        //when
+        when(listener.recept()).thenReturn("2",cardId);
+        when(boy.unPark(card)).thenThrow(new InvalidParkingCardException());
+        controller.start();
+
+        //then
+        //verify(boy).unPark(card);
+        verify(listener).send("非法小票，无法取出车，请查证后再输");
     }
 }
