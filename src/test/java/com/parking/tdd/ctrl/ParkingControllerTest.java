@@ -77,4 +77,25 @@ public class ParkingControllerTest {
         verify(listener).send(String.format("停车成功，您的小票是：\n %s",cardId));
 
     }
+
+    @Test
+    public void should_pick_a_car_when_select_2_and_then_give_a_parking_card_number() {
+        //give
+        ViewListener listener = mock(ViewListener.class);
+        ParkingBoy boy = mock(ParkingBoy.class);
+        ParkingController controller = new ParkingController(listener, boy);
+        String cardId = UUID.randomUUID().toString();
+        Car car = new Car("1234");
+        ParkingCard card = new ParkingCard(cardId);
+
+        //when
+        when(listener.recept()).thenReturn("2",cardId);
+        when(boy.unPark(card)).thenReturn(car);
+        controller.start();
+
+        //then
+        verify(boy).unPark(card);
+        verify(listener).send("车已取出，您的车牌号是: 1234");
+    }
+
 }

@@ -33,6 +33,9 @@ public class ParkingController {
         if (msg=="1"){
             String cardId=parking();
             listener.send(String.format("停车成功，您的小票是：\n %s",cardId));
+        }else if (msg=="2"){
+            String carId=picking();
+            listener.send(String.format("车已取出，您的车牌号是: %s",carId));
         }
     }
 }
