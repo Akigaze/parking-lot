@@ -3,6 +3,7 @@ package com.parking.tdd.ctrl;
 import com.parking.tdd.core.Car;
 import com.parking.tdd.core.ParkingBoy;
 import com.parking.tdd.core.ParkingCard;
+import com.parking.tdd.core.exception.AllParkingLotsFullException;
 import com.parking.tdd.view.ViewListener;
 
 public class ParkingController {
@@ -30,14 +31,19 @@ public class ParkingController {
 
     public void start() {
         String msg=listener.recept();
-        if (msg=="1"){
-            String cardId=parking();
-            listener.send(String.format("停车成功，您的小票是：\n %s",cardId));
-        }else if (msg=="2"){
-            String carId=picking();
-            listener.send(String.format("车已取出，您的车牌号是: %s",carId));
-        }else {
-            listener.send("非法指令，请查证后再输");
+        try {
+            if (msg=="1"){
+                String cardId=parking();
+                listener.send(String.format("停车成功，您的小票是：\n %s",cardId));
+            }else if (msg=="2"){
+                String carId=picking();
+                listener.send(String.format("车已取出，您的车牌号是: %s",carId));
+            }else {
+                listener.send("非法指令，请查证后再输");
+            }
+        }catch (AllParkingLotsFullException exception){
+            listener.send("车已停满，请晚点再来");
         }
+
     }
 }
