@@ -1,6 +1,7 @@
 package com.parking.tdd.ctrl;
 
 import com.parking.tdd.core.Car;
+import com.parking.tdd.core.ParkingCard;
 import com.parking.tdd.view.ViewListener;
 
 public class Transformer {
@@ -12,5 +13,10 @@ public class Transformer {
     public Car convertToCar() {
         String id=listener.recept();
         return new Car(id);
+    }
+
+    public ParkingCard convertToParkingCard() {
+        String id=listener.recept();
+        return new ParkingCard(id);
     }
 }
