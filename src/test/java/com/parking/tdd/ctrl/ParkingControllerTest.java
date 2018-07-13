@@ -9,9 +9,7 @@ import org.junit.Test;
 import java.util.UUID;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -98,4 +96,19 @@ public class ParkingControllerTest {
         verify(listener).send("车已取出，您的车牌号是: 1234");
     }
 
+    @Test
+    public void should_show_alarm_when__give_a_wrong_input_at_the_beginning() {
+        //give
+        ViewListener listener = mock(ViewListener.class);
+        ParkingBoy boy = mock(ParkingBoy.class);
+        ParkingController controller = new ParkingController(listener, boy);
+
+        //when
+        when(listener.recept()).thenReturn("sdfgs");
+        controller.start();
+
+        //then
+        verify(listener).send("非法指令，请查证后再输");
+
+    }
 }

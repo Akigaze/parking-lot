@@ -36,6 +36,8 @@ public class ParkingController {
         }else if (msg=="2"){
             String carId=picking();
             listener.send(String.format("车已取出，您的车牌号是: %s",carId));
+        }else {
+            listener.send("非法指令，请查证后再输");
         }
     }
 }
