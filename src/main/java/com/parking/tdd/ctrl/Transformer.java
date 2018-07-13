@@ -14,13 +14,11 @@ public class Transformer {
 
     }
 
-    public Car convertToCar() {
-        String id=listener.recept();
+    public Car convertToCar(String id) {
         return new Car(id);
     }
 
-    public ParkingCard convertToParkingCard() {
-        String id=listener.recept();
+    public ParkingCard convertToParkingCard(String id) {
         return new ParkingCard(id);
     }
 

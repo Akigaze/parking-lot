@@ -1,6 +1,7 @@
 package com.parking.tdd.core;
 
-import com.parking.tdd.core.*;
+import com.parking.tdd.core.exception.AllParkingLotsFullException;
+import com.parking.tdd.core.exception.InvalidParkingCardException;
 import org.junit.Test;
 
 import java.util.ArrayList;

@@ -18,12 +18,12 @@ public class TransformerTest {
     @Test
     public void should_transform_into_a_car_when_give_a_car_id_String(){
         //give
-        ViewListener listener=mock(ViewListener.class);
-        Transformer transformer=new Transformer(listener);
-        when(listener.recept()).thenReturn("12345");
+        //ViewListener listener=mock(ViewListener.class);
+        Transformer transformer=new Transformer();
+        //when(listener.recept()).thenReturn("12345");
 
         //when
-        Car car=transformer.convertToCar();
+        Car car=transformer.convertToCar("12345");
         //then
         assertThat(car.getId(),is("12345"));
     }
@@ -31,13 +31,13 @@ public class TransformerTest {
     @Test
     public void should_transform_into_a_parking_card_when_give_a_card_id_String(){
         //give
-        ViewListener listener=mock(ViewListener.class);
-        Transformer transformer=new Transformer(listener);
+        //ViewListener listener=mock(ViewListener.class);
+        Transformer transformer=new Transformer();
         String id=UUID.randomUUID().toString();
-        when(listener.recept()).thenReturn(id);
+        //when(listener.recept()).thenReturn(id);
 
         //when
-        ParkingCard card =transformer.convertToParkingCard();
+        ParkingCard card =transformer.convertToParkingCard(id);
         //then
         assertThat(card.getId(),is(id));
     }

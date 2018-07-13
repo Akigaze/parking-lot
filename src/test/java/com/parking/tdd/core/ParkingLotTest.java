@@ -1,9 +1,6 @@
 package com.parking.tdd.core;
 
-import com.parking.tdd.core.Car;
-import com.parking.tdd.core.ParkingCard;
-import com.parking.tdd.core.ParkingLot;
-import com.parking.tdd.core.ParkingLotFullException;
+import com.parking.tdd.core.exception.ParkingLotFullException;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
