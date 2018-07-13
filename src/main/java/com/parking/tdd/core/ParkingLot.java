@@ -2,6 +2,7 @@ package com.parking.tdd.core;
 
 import com.parking.tdd.core.exception.ParkingLotFullException;
 
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,7 +29,12 @@ public class ParkingLot {
     }
 
     public Car unpark(ParkingCard card) {
-        return parkedCars.remove(card);
+        for (ParkingCard c:parkedCars.keySet()){
+            if (c.equals(card)){
+                return parkedCars.get(c);
+            }
+        }
+        return null;
     }
 
     public boolean isFull() {
@@ -36,7 +42,12 @@ public class ParkingLot {
     }
 
     public boolean containsParkingCard(ParkingCard card){
-        return parkedCars.containsKey(card);
+        for (ParkingCard c:parkedCars.keySet()){
+            if (c.equals(card)){
+                return true;
+            }
+        }
+        return false;
     }
 
 }

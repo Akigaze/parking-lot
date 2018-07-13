@@ -29,4 +29,12 @@ public class ParkingBoy {
         }
         throw new InvalidParkingCardException();
     }
+    public boolean isAllParkingLotsFull(){
+        for (ParkingLot lot:parkingLotList){
+            if (!lot.isFull()){
+                return false;
+            }
+        }
+        return true;
+    }
 }

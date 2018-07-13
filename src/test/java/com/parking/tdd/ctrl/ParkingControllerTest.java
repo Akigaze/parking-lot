@@ -12,7 +12,6 @@ import java.util.UUID;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -120,7 +119,6 @@ public class ParkingControllerTest {
         ParkingBoy boy = mock(ParkingBoy.class);
         ParkingController controller = new ParkingController(listener, boy);
         Car car = new Car("1234");
-        ParkingCard card = new ParkingCard();
         //when
         when(listener.recept()).thenReturn("1","1234");
         when(boy.park(car)).thenThrow(new AllParkingLotsFullException());
@@ -137,7 +135,6 @@ public class ParkingControllerTest {
         ParkingBoy boy = mock(ParkingBoy.class);
         ParkingController controller = new ParkingController(listener, boy);
         String cardId = UUID.randomUUID().toString();
-        Car car = new Car("1234");
         ParkingCard card = new ParkingCard(cardId);
 
         //when
@@ -148,5 +145,30 @@ public class ParkingControllerTest {
         //then
         //verify(boy).unPark(card);
         verify(listener).send("非法小票，无法取出车，请查证后再输");
+    }
+
+    @Test
+    public void should_pick_specific_car_when_give_its_parking_card_number_from() {
+        //give
+        ViewListener listener = mock(ViewListener.class);
+        ParkingBoy boy = mock(ParkingBoy.class);
+        ParkingController controller = new ParkingController(listener, boy);
+        String cardId = UUID.randomUUID().toString();
+        Car car = new Car("1234");
+        ParkingCard card = new ParkingCard(cardId);
+
+        //when
+        when(listener.recept()).thenReturn("1","1234","2",cardId,"end");
+        when(boy.park(car)).thenReturn(card);
+        when(boy.unPark(card)).thenReturn(car);
+
+        controller.start();
+
+        //then
+        verify(boy).park(car);
+        verify(boy).unPark(card);
+        verify(listener).send(String.format("停车成功，您的小票是：\n %s",cardId));
+        verify(listener).send("车已取出，您的车牌号是: 1234");
+
     }
 }
