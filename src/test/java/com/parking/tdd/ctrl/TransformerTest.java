@@ -41,4 +41,28 @@ public class TransformerTest {
         //then
         assertThat(card.getId(),is(id));
     }
+
+    @Test
+    public void should_get_the_car_id_when_give_a_car(){
+        //give
+        Transformer transformer=new Transformer();
+        Car car=new Car("1234");
+
+        //when
+        String id=transformer.convertToCarId(car);
+        //then
+        assertThat(id,is("1234"));
+    }
+
+    @Test
+    public void should_get_the_card_id_when_give_a_card(){
+        //give
+        Transformer transformer=new Transformer();
+        ParkingCard card=new ParkingCard("1234");
+
+        //when
+        String id=transformer.convertToParkingCardId(card);
+        //then
+        assertThat(id,is("1234"));
+    }
 }

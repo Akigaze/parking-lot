@@ -10,6 +10,10 @@ public class Transformer {
         this.listener=listner;
     }
 
+    public Transformer() {
+
+    }
+
     public Car convertToCar() {
         String id=listener.recept();
         return new Car(id);
@@ -18,5 +22,13 @@ public class Transformer {
     public ParkingCard convertToParkingCard() {
         String id=listener.recept();
         return new ParkingCard(id);
+    }
+
+    public String convertToCarId(Car car) {
+        return car.getId();
+    }
+
+    public String convertToParkingCardId(ParkingCard card) {
+        return card.getId();
     }
 }
