@@ -56,4 +56,25 @@ public class ParkingControllerTest {
         verify(boy).unPark(card);
         assertThat(result,is("1234"));
     }
+
+    @Test
+    public void should_park_a_car_when_select_1_and_then_give_a_car_number() {
+        //give
+        ViewListener listener = mock(ViewListener.class);
+        ParkingBoy boy = mock(ParkingBoy.class);
+        ParkingController controller = new ParkingController(listener, boy);
+        String cardId = UUID.randomUUID().toString();
+        Car car = new Car("1234");
+        ParkingCard card = new ParkingCard(cardId);
+
+        //when
+        when(listener.recept()).thenReturn("1","1234");
+        when(boy.park(car)).thenReturn(card);
+        controller.start();
+
+        //then
+        verify(boy).park(car);
+        verify(listener).send(String.format("停车成功，您的小票是：\n %s",cardId));
+
+    }
 }

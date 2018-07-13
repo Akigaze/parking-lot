@@ -27,4 +27,12 @@ public class ParkingController {
         ParkingCard card=transformer.convertToParkingCard(id);
         return transformer.convertToCarId(boy.unPark(card));
     }
+
+    public void start() {
+        String msg=listener.recept();
+        if (msg=="1"){
+            String cardId=parking();
+            listener.send(String.format("停车成功，您的小票是：\n %s",cardId));
+        }
+    }
 }
