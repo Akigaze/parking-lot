@@ -1,16 +1,16 @@
-package com.parking.tdd;
+package com.parking.tdd.core;
 
+import com.parking.tdd.core.Car;
+import com.parking.tdd.core.ParkingCard;
+import com.parking.tdd.core.ParkingLot;
+import com.parking.tdd.core.ParkingLotFullException;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
-import static org.mockito.Mockito.calls;
 import static org.mockito.Mockito.mock;
 
 public class ParkingLotTest {
@@ -107,5 +107,19 @@ public class ParkingLotTest {
 
     }
 
+    @Test
+    public void should_return_false_when_two_Parking_Cards_with_different_id(){
+        //give
+        ParkingCard card1=new ParkingCard();
+        ParkingCard card2=new ParkingCard();
+        //when
+        card2.setID(card1.getId());
+        ParkingCard card3=new ParkingCard();
+
+        //then
+        assertThat(card1.equals(card2),is(true));
+        assertThat(card1.equals(card3),is(false));
+
+    }
 
 }

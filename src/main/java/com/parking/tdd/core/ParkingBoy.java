@@ -1,4 +1,4 @@
-package com.parking.tdd;
+package com.parking.tdd.core;
 
 import java.util.List;
 

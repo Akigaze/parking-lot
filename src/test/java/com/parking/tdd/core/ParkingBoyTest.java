@@ -1,5 +1,6 @@
-package com.parking.tdd;
+package com.parking.tdd.core;
 
+import com.parking.tdd.core.*;
 import org.junit.Test;
 
 import java.util.ArrayList;
