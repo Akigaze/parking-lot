@@ -13,4 +13,15 @@ public class Car {
     public String getId() {
         return id;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Car){
+            final Car car=(Car)obj;
+            if (this.id.equals(car.id)){
+                return true;
+            }
+        }
+        return false;
+    }
 }
