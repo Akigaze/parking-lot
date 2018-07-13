@@ -2,6 +2,7 @@ package com.parking.tdd.ctrl;
 
 import com.parking.tdd.core.Car;
 import com.parking.tdd.core.ParkingBoy;
+import com.parking.tdd.core.ParkingCard;
 import com.parking.tdd.view.ViewListener;
 
 public class ParkingController {
@@ -12,9 +13,18 @@ public class ParkingController {
         this.boy=boy;
     }
 
-    public void parking() {
+    public String parking() {
+        Transformer transformer=new Transformer();
         String id=listener.recept();
-        Car car=new Transformer().convertToCar(id);
-        boy.park(car);
+        Car car=transformer.convertToCar(id);
+        return transformer.convertToParkingCardId(boy.park(car));
+
+    }
+
+    public String picking() {
+        Transformer transformer=new Transformer();
+        String id=listener.recept();
+        ParkingCard card=transformer.convertToParkingCard(id);
+        return transformer.convertToCarId(boy.unPark(card));
     }
 }
