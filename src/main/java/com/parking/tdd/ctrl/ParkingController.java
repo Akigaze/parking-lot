@@ -23,7 +23,6 @@ public class ParkingController {
         String id=listener.recept();
         Car car=transformer.convertToCar(id);
         return transformer.convertToParkingCardId(boy.park(car));
-
     }
 
     public String picking() {
@@ -37,7 +36,7 @@ public class ParkingController {
             if (boy.isAllParkingLotsFull())
                 throw new AllParkingLotsFullException();
             else
-                listener.send("请输入车牌号:");
+                listener.send("请输入车牌号: ");
         }else if (msg.equals(PICK)){
             listener.send("请输入小票编号：");
         }else {
@@ -54,7 +53,7 @@ public class ParkingController {
                 showMsgAfterMainPage(msg);
                 if (msg.equals(PARK)){
                     String cardId=parking();
-                    listener.send(String.format("停车成功，您的小票是：\n %s",cardId));
+                    listener.send(String.format("停车成功，您的小票是：\n%s",cardId));
                 }else if (msg.equals(PICK)){
                     String carId=picking();
                     listener.send(String.format("车已取出，您的车牌号是: %s",carId));

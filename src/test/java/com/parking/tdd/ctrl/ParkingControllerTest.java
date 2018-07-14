@@ -12,7 +12,6 @@ import java.util.UUID;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.*;
 
 public class ParkingControllerTest {
@@ -67,13 +66,13 @@ public class ParkingControllerTest {
         ParkingCard card = new ParkingCard(cardId);
 
         //when
-        when(listener.recept()).thenReturn("1","1234");
+        when(listener.recept()).thenReturn("1","1234","end");
         when(boy.park(car)).thenReturn(card);
         controller.start();
 
         //then
         verify(boy).park(car);
-        verify(listener).send(String.format("停车成功，您的小票是：\n %s",cardId));
+        verify(listener).send(String.format("停车成功，您的小票是：\n%s",cardId));
     }
 
     @Test
@@ -87,7 +86,7 @@ public class ParkingControllerTest {
         ParkingCard card = new ParkingCard(cardId);
 
         //when
-        when(listener.recept()).thenReturn("2",cardId);
+        when(listener.recept()).thenReturn("2",cardId,"end");
         when(boy.unPark(card)).thenReturn(car);
         controller.start();
 
@@ -104,7 +103,7 @@ public class ParkingControllerTest {
         ParkingController controller = new ParkingController(listener, boy);
 
         //when
-        when(listener.recept()).thenReturn("sdfgs");
+        when(listener.recept()).thenReturn("sdfgs","end");
         controller.start();
 
         //then
@@ -119,7 +118,7 @@ public class ParkingControllerTest {
         ParkingController controller = new ParkingController(listener, boy);
         Car car = new Car("1234");
         //when
-        when(listener.recept()).thenReturn("1","1234");
+        when(listener.recept()).thenReturn("1","1234","end");
         when(boy.park(car)).thenThrow(new AllParkingLotsFullException());
 
         //then
@@ -137,7 +136,7 @@ public class ParkingControllerTest {
         ParkingCard card = new ParkingCard(cardId);
 
         //when
-        when(listener.recept()).thenReturn("2",cardId);
+        when(listener.recept()).thenReturn("2",cardId,"end");
         when(boy.unPark(card)).thenThrow(new InvalidParkingCardException());
         controller.start();
 
@@ -166,7 +165,7 @@ public class ParkingControllerTest {
         //then
         verify(boy).park(car);
         verify(boy).unPark(card);
-        verify(listener).send(String.format("停车成功，您的小票是：\n %s",cardId));
+        verify(listener).send(String.format("停车成功，您的小票是：\n%s",cardId));
         verify(listener).send("车已取出，您的车牌号是: 1234");
 
     }
@@ -186,12 +185,6 @@ public class ParkingControllerTest {
 
         //then
         verify(listener).send("车已停满，请晚点再来");
-//        try {
-//            verify(listener).send("请输入车牌号:");
-//            verify(listener,never()).send("请输入车牌号:");
-//            fail("ALL PARKING LOTS ARE FULL,SHOULD NOT ASK FOR A CAR NUMBER!");
-//        }catch (Exception e){
-//
-//        }
+
     }
 }
