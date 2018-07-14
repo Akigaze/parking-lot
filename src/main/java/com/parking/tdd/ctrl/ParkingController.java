@@ -34,12 +34,12 @@ public class ParkingController {
     }
     private void showMsgAfterMainPage(String msg){
         if (msg.equals(PARK)){
-            listener.send("请输入车牌号:");
-        }else if (msg.equals(PICK)){
             if (boy.isAllParkingLotsFull())
                 throw new AllParkingLotsFullException();
             else
-                listener.send("请输入小票编号：");
+                listener.send("请输入车牌号:");
+        }else if (msg.equals(PICK)){
+            listener.send("请输入小票编号：");
         }else {
             listener.send("非法指令，请查证后再输");
         }

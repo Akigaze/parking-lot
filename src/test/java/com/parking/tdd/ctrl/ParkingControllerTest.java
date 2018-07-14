@@ -12,9 +12,8 @@ import java.util.UUID;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.Mockito.*;
 
 public class ParkingControllerTest {
     @Test
@@ -170,5 +169,29 @@ public class ParkingControllerTest {
         verify(listener).send(String.format("停车成功，您的小票是：\n %s",cardId));
         verify(listener).send("车已取出，您的车牌号是: 1234");
 
+    }
+
+    @Test
+    public void should_alarm_first_when_all_parking_lots_are_full_not_ask_for_a_car_number() {
+        //give
+        ViewListener listener = mock(ViewListener.class);
+        ParkingBoy boy = mock(ParkingBoy.class);
+        ParkingController controller = new ParkingController(listener, boy);
+
+        //when
+        when(listener.recept()).thenReturn("1","end");
+        when(boy.isAllParkingLotsFull()).thenReturn(true);
+
+        controller.start();
+
+        //then
+        verify(listener).send("车已停满，请晚点再来");
+//        try {
+//            verify(listener).send("请输入车牌号:");
+//            verify(listener,never()).send("请输入车牌号:");
+//            fail("ALL PARKING LOTS ARE FULL,SHOULD NOT ASK FOR A CAR NUMBER!");
+//        }catch (Exception e){
+//
+//        }
     }
 }

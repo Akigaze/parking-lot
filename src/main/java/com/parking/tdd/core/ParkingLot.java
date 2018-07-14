@@ -31,7 +31,7 @@ public class ParkingLot {
     public Car unpark(ParkingCard card) {
         for (ParkingCard c:parkedCars.keySet()){
             if (c.equals(card)){
-                return parkedCars.get(c);
+                return parkedCars.remove(c);
             }
         }
         return null;
