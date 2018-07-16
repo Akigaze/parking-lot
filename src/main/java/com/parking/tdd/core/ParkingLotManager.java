@@ -1,5 +1,7 @@
 package com.parking.tdd.core;
 
+import com.parking.tdd.core.exception.DeleteParkingLotWithCarException;
+
 import java.util.List;
 
 public class ParkingLotManager {
@@ -46,7 +48,12 @@ public class ParkingLotManager {
         lotList.add(new ParkingLot(getParkingLotNum(),name,capacity));
     }
 
-    public void deleteParkingLotById(int lodId) {
+    public void deleteParkingLotById(int lodId) throws DeleteParkingLotWithCarException {
+        if (countCarNum()>0){
+            throw new DeleteParkingLotWithCarException();
+        }
         lotList.remove(ParkingLot.getInstance(lodId));
+
     }
+
 }
