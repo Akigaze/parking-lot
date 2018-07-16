@@ -40,4 +40,7 @@ public class ParkingLotManager {
         return lotList.stream().map(lot->lot.getCapacity()).reduce(0,(total,current)->total+current);
     }
 
+    public void buildParkingLot(String name, int capacity) {
+        lotList.add(new ParkingLot(name,capacity));
+    }
 }
