@@ -2,7 +2,6 @@ package com.parking.tdd.core;
 
 import com.parking.tdd.core.exception.ParkingLotFullException;
 
-import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 

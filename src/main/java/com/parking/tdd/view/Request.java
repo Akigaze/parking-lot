@@ -1,4 +1,4 @@
-package com.parking.planb.view;
+package com.parking.tdd.view;
 
 import java.util.Scanner;
 

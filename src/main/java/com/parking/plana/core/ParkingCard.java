@@ -1,4 +1,4 @@
-package com.parking.planb.core;
+package com.parking.plana.core;
 
 import java.util.Objects;
 import java.util.UUID;

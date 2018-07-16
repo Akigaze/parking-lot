@@ -1,4 +1,4 @@
-package com.parking.planb.core.exception;
+package com.parking.plana.core.exception;
 
 public class InvalidParkingCardException extends RuntimeException {
 }

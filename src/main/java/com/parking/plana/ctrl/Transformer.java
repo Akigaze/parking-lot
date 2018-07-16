@@ -1,8 +1,8 @@
-package com.parking.planb.ctrl;
+package com.parking.plana.ctrl;
 
-import com.parking.planb.core.Car;
-import com.parking.planb.view.Viewer;
-import com.parking.planb.core.ParkingCard;
+import com.parking.plana.core.Car;
+import com.parking.plana.core.ParkingCard;
+import com.parking.plana.view.Viewer;
 
 public class Transformer {
     private Viewer listener;

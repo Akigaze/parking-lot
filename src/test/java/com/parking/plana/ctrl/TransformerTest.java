@@ -1,13 +1,13 @@
-package com.parking.tdd.ctrl;
+package com.parking.plana.ctrl;
 
-import com.parking.tdd.core.Car;
+import com.parking.plana.core.Car;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.mockito.Mockito.mock;
 
-import com.parking.tdd.core.ParkingCard;
+import com.parking.plana.core.ParkingCard;
 import org.junit.Test;
 
 import java.util.UUID;

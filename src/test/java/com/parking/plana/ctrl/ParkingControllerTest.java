@@ -1,10 +1,10 @@
-package com.parking.tdd.ctrl;
+package com.parking.plana.ctrl;
 
-import com.parking.tdd.core.Car;
-import com.parking.tdd.core.ParkingBoy;
-import com.parking.tdd.core.ParkingCard;
-import com.parking.tdd.core.exception.InvalidParkingCardException;
-import com.parking.tdd.view.Viewer;
+import com.parking.plana.core.Car;
+import com.parking.plana.core.ParkingBoy;
+import com.parking.plana.core.ParkingCard;
+import com.parking.plana.core.exception.InvalidParkingCardException;
+import com.parking.plana.view.Viewer;
 import org.junit.Test;
 
 import java.util.UUID;

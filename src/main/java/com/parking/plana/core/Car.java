@@ -1,4 +1,4 @@
-package com.parking.planb.core;
+package com.parking.plana.core;
 
 public class Car {
     private String id=String.valueOf(Math.random());

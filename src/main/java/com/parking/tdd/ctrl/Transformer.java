@@ -2,13 +2,8 @@ package com.parking.tdd.ctrl;
 
 import com.parking.tdd.core.Car;
 import com.parking.tdd.core.ParkingCard;
-import com.parking.tdd.view.Viewer;
 
 public class Transformer {
-    private Viewer listener;
-    public Transformer(Viewer listner) {
-        this.listener=listner;
-    }
 
     public Transformer() {
 

@@ -1,6 +1,6 @@
-package com.parking.planb.core;
+package com.parking.plana.core;
 
-import com.parking.planb.core.exception.ParkingLotFullException;
+import com.parking.plana.core.exception.ParkingLotFullException;
 
 import java.util.HashMap;
 import java.util.Map;

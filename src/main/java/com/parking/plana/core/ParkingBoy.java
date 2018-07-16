@@ -1,7 +1,7 @@
-package com.parking.planb.core;
+package com.parking.plana.core;
 
-import com.parking.planb.core.exception.AllParkingLotsFullException;
-import com.parking.planb.core.exception.InvalidParkingCardException;
+import com.parking.plana.core.exception.AllParkingLotsFullException;
+import com.parking.plana.core.exception.InvalidParkingCardException;
 
 import java.util.List;
 
