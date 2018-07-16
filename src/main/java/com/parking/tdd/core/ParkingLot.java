@@ -29,12 +29,13 @@ public class ParkingLot {
     }
 
     public Car unpark(ParkingCard card) {
-        for (ParkingCard c:parkedCars.keySet()){
-            if (c.equals(card)){
-                return parkedCars.remove(c);
-            }
-        }
-        return null;
+//        for (ParkingCard c:parkedCars.keySet()){
+//            if (c.equals(card)){
+//                return parkedCars.remove(c);
+//            }
+//        }
+//        return null;
+        return parkedCars.remove(card);
     }
 
     public boolean isFull() {
@@ -42,12 +43,13 @@ public class ParkingLot {
     }
 
     public boolean containsParkingCard(ParkingCard card){
-        for (ParkingCard c:parkedCars.keySet()){
-            if (c.equals(card)){
-                return true;
-            }
-        }
-        return false;
+//        for (ParkingCard c:parkedCars.keySet()){
+//            if (c.equals(card)){
+//                return true;
+//            }
+//        }
+//        return false;
+        return parkedCars.containsKey(card);
     }
 
 }

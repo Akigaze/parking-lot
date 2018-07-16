@@ -118,8 +118,9 @@ public class ParkingControllerTest {
         ParkingController controller = new ParkingController(listener, boy);
         Car car = new Car("1234");
         //when
-        when(listener.recept()).thenReturn("1","1234","end");
-        when(boy.park(car)).thenThrow(new AllParkingLotsFullException());
+        when(listener.recept()).thenReturn("1","end");
+        when(boy.isAllParkingLotsFull()).thenReturn(true);
+//        when(boy.park(car)).thenThrow(new AllParkingLotsFullException());
 
         //then
         controller.start();
@@ -158,6 +159,8 @@ public class ParkingControllerTest {
         //when
         when(listener.recept()).thenReturn("1","1234","2",cardId,"end");
         when(boy.park(car)).thenReturn(card);
+
+        when(boy.isAllParkingLotsFull()).thenReturn(false);
         when(boy.unPark(card)).thenReturn(car);
 
         controller.start();

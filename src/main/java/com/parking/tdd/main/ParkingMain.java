@@ -3,6 +3,7 @@ package com.parking.tdd.main;
 import com.parking.tdd.core.ParkingBoy;
 import com.parking.tdd.core.ParkingLot;
 import com.parking.tdd.ctrl.ParkingController;
+import com.parking.tdd.view.Router;
 import com.parking.tdd.view.ViewListener;
 
 import java.util.ArrayList;
@@ -16,6 +17,14 @@ public class ParkingMain {
         lotList.add(new ParkingLot(1));
         ParkingBoy boy=new ParkingBoy(lotList);
         ParkingController controller=new ParkingController(viewer,boy);
-        controller.start();
+        //controller.start();
+        Router router=new Router();
+
+        while (true){
+            controller.handlePage(router);
+
+            String cmd=viewer.recept();
+            router.setCurrentPageByCmd(cmd);
+        }
     }
 }

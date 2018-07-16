@@ -1,7 +1,7 @@
 package com.parking.tdd.core;
 
 public class Car {
-    private String id;
+    private String id=String.valueOf(Math.random());
 
     public Car(){
 
