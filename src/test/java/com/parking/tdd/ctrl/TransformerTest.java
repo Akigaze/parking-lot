@@ -1,8 +1,7 @@
 package com.parking.tdd.ctrl;
 
-import com.parking.plana.core.Car;
-import com.parking.plana.core.ParkingCard;
-import com.parking.plana.ctrl.Transformer;
+import com.parking.tdd.core.Car;
+import com.parking.tdd.core.ParkingCard;
 import org.junit.Test;
 
 import java.util.UUID;

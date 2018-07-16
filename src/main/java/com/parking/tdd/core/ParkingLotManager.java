@@ -38,12 +38,15 @@ public class ParkingLotManager {
     private int countSiteNum() {
         return lotList.stream().map(lot->lot.getCapacity()).reduce(0,(total,current)->total+current);
     }
-
-    public void buildParkingLot(String name, int capacity) {
-        lotList.add(new ParkingLot(name,capacity));
+    public int getParkingLotNum(){
+        return lotList.size();
     }
 
-    public void deleteParkingLotById(int i) {
+    public void buildParkingLot(String name, int capacity) {
+        lotList.add(new ParkingLot(getParkingLotNum(),name,capacity));
+    }
 
+    public void deleteParkingLotById(int lodId) {
+        lotList.remove(ParkingLot.getInstance(lodId));
     }
 }

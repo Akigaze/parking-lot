@@ -4,6 +4,7 @@ import com.parking.tdd.core.exception.ParkingLotFullException;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class ParkingLot {
     private int id;
@@ -11,21 +12,33 @@ public class ParkingLot {
     private int capacity;
     private Map<ParkingCard,Car> parkedCars=new HashMap<>();
     private static int idCount=0;
+
+    public ParkingLot(){}
+
+    public ParkingLot(int capacity) {
+        this.capacity = capacity;
+    }
+
     public ParkingLot(String name, int capacity) {
         this.id = ++idCount;
         this.name = name;
         this.capacity = capacity;
     }
 
-
-    public ParkingLot(int capacity) {
-        this.capacity = capacity;
-    }
-
-    public ParkingLot(int i, String name, int capacity) {
+    public ParkingLot(int id, String name, int capacity) {
         this.id=id;
         this.name=name;
         this.capacity=capacity;
+    }
+
+    public static ParkingLot getInstance(int id){
+        ParkingLot lot=new ParkingLot();
+        lot.setId(id);
+        return lot;
+    }
+
+    private void setId(int id) {
+        this.id=id;
     }
 
     public Map<ParkingCard,Car> getParkedCars() {
@@ -68,5 +81,19 @@ public class ParkingLot {
 
     public int countCarNum() {
         return parkedCars.size();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ParkingLot lot = (ParkingLot) o;
+        return id == lot.id;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id);
     }
 }
