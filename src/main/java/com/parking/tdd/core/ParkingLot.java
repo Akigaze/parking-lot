@@ -17,8 +17,15 @@ public class ParkingLot {
         this.capacity = capacity;
     }
 
+
     public ParkingLot(int capacity) {
         this.capacity = capacity;
+    }
+
+    public ParkingLot(int i, String name, int capacity) {
+        this.id=id;
+        this.name=name;
+        this.capacity=capacity;
     }
 
     public Map<ParkingCard,Car> getParkedCars() {

@@ -81,5 +81,22 @@ public class ParkingLotManagerTest {
 
     }
 
+    @Test
+    public void should_successfully_delete_a_empty_parking_lot_when_call_deleteParkingLotById(){
+        //give
+        ParkingBoy boy=mock(ParkingBoy.class);
+        List<ParkingLot> lotList=new ArrayList<>();
+        ParkingLot lot1=new ParkingLot(1,"软件园停车场",2);
+        ParkingLot lot2=new ParkingLot(2,"唐家湾停车场",2);
 
+        lotList.add(lot1);
+        lotList.add(lot2);
+        ParkingLotManager manager=new ParkingLotManager(boy,lotList);
+
+        //when
+        manager.deleteParkingLotById(1);
+        //then
+        assertThat(lotList.contains(lot1),is(false));
+        assertThat(lotList.contains(lot2),is(true));
+    }
 }

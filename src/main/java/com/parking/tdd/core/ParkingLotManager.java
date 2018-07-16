@@ -5,7 +5,6 @@ import java.util.List;
 public class ParkingLotManager {
     private List<ParkingLot> lotList;
     private ParkingBoy boy;
-    private int parkingSiteNum;
 
     public ParkingLotManager(ParkingBoy boy, List<ParkingLot> lotList) {
         this.boy=boy;
@@ -42,5 +41,9 @@ public class ParkingLotManager {
 
     public void buildParkingLot(String name, int capacity) {
         lotList.add(new ParkingLot(name,capacity));
+    }
+
+    public void deleteParkingLotById(int i) {
+
     }
 }

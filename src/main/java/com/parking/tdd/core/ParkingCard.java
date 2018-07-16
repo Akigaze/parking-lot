@@ -20,18 +20,6 @@ public class ParkingCard {
         this.id=s;
     }
 
-//    @Override
-//    public boolean equals(Object obj) {
-//        if (obj instanceof ParkingCard){
-//            final ParkingCard card=(ParkingCard)obj;
-//            if (this.id.equals(card.id)){
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
