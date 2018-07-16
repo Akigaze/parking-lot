@@ -6,10 +6,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 import com.parking.tdd.core.ParkingCard;
-import com.parking.tdd.view.ViewListener;
 import org.junit.Test;
 
 import java.util.UUID;

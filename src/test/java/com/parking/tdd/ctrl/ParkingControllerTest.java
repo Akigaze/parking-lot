@@ -3,9 +3,8 @@ package com.parking.tdd.ctrl;
 import com.parking.tdd.core.Car;
 import com.parking.tdd.core.ParkingBoy;
 import com.parking.tdd.core.ParkingCard;
-import com.parking.tdd.core.exception.AllParkingLotsFullException;
 import com.parking.tdd.core.exception.InvalidParkingCardException;
-import com.parking.tdd.view.ViewListener;
+import com.parking.tdd.view.Viewer;
 import org.junit.Test;
 
 import java.util.UUID;
@@ -18,7 +17,7 @@ public class ParkingControllerTest {
     @Test
     public void should_park_a_car_when_give_a_car_number() {
         //give
-        ViewListener listener = mock(ViewListener.class);
+        Viewer listener = mock(Viewer.class);
         ParkingBoy boy = mock(ParkingBoy.class);
         ParkingController controller = new ParkingController(listener, boy);
         String cardId = UUID.randomUUID().toString();
@@ -38,7 +37,7 @@ public class ParkingControllerTest {
     @Test
     public void should_pick_a_car_when_give_a_parking_card_number() {
         //give
-        ViewListener listener = mock(ViewListener.class);
+        Viewer listener = mock(Viewer.class);
         ParkingBoy boy = mock(ParkingBoy.class);
         ParkingController controller = new ParkingController(listener, boy);
         String cardId = UUID.randomUUID().toString();
@@ -58,7 +57,7 @@ public class ParkingControllerTest {
     @Test
     public void should_park_a_car_when_select_1_and_then_give_a_car_number() {
         //give
-        ViewListener listener = mock(ViewListener.class);
+        Viewer listener = mock(Viewer.class);
         ParkingBoy boy = mock(ParkingBoy.class);
         ParkingController controller = new ParkingController(listener, boy);
         String cardId = UUID.randomUUID().toString();
@@ -78,7 +77,7 @@ public class ParkingControllerTest {
     @Test
     public void should_pick_a_car_when_select_2_and_then_give_a_parking_card_number() {
         //give
-        ViewListener listener = mock(ViewListener.class);
+        Viewer listener = mock(Viewer.class);
         ParkingBoy boy = mock(ParkingBoy.class);
         ParkingController controller = new ParkingController(listener, boy);
         String cardId = UUID.randomUUID().toString();
@@ -98,7 +97,7 @@ public class ParkingControllerTest {
     @Test
     public void should_show_alarm_when__give_a_wrong_input_at_the_beginning() {
         //give
-        ViewListener listener = mock(ViewListener.class);
+        Viewer listener = mock(Viewer.class);
         ParkingBoy boy = mock(ParkingBoy.class);
         ParkingController controller = new ParkingController(listener, boy);
 
@@ -113,7 +112,7 @@ public class ParkingControllerTest {
     @Test
     public void should_park_failly_when_all_parking_lots_are_full() {
         //give
-        ViewListener listener = mock(ViewListener.class);
+        Viewer listener = mock(Viewer.class);
         ParkingBoy boy = mock(ParkingBoy.class);
         ParkingController controller = new ParkingController(listener, boy);
         Car car = new Car("1234");
@@ -130,7 +129,7 @@ public class ParkingControllerTest {
     @Test
     public void should_pick_a_car_failly_when_give_a_invalid_parking_card_number() {
         //give
-        ViewListener listener = mock(ViewListener.class);
+        Viewer listener = mock(Viewer.class);
         ParkingBoy boy = mock(ParkingBoy.class);
         ParkingController controller = new ParkingController(listener, boy);
         String cardId = UUID.randomUUID().toString();
@@ -149,7 +148,7 @@ public class ParkingControllerTest {
     @Test
     public void should_pick_specific_car_when_give_its_parking_card_number_from() {
         //give
-        ViewListener listener = mock(ViewListener.class);
+        Viewer listener = mock(Viewer.class);
         ParkingBoy boy = mock(ParkingBoy.class);
         ParkingController controller = new ParkingController(listener, boy);
         String cardId = UUID.randomUUID().toString();
@@ -176,7 +175,7 @@ public class ParkingControllerTest {
     @Test
     public void should_alarm_first_when_all_parking_lots_are_full_not_ask_for_a_car_number() {
         //give
-        ViewListener listener = mock(ViewListener.class);
+        Viewer listener = mock(Viewer.class);
         ParkingBoy boy = mock(ParkingBoy.class);
         ParkingController controller = new ParkingController(listener, boy);
 

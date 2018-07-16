@@ -1,8 +1,8 @@
-package com.parking.tdd.ctrl;
+package com.parking.planb.ctrl;
 
-import com.parking.tdd.core.Car;
-import com.parking.tdd.core.ParkingCard;
-import com.parking.tdd.view.Viewer;
+import com.parking.planb.core.Car;
+import com.parking.planb.view.Viewer;
+import com.parking.planb.core.ParkingCard;
 
 public class Transformer {
     private Viewer listener;

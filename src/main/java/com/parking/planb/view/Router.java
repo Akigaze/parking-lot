@@ -1,4 +1,6 @@
-package com.parking.tdd.view;
+package com.parking.planb.view;
+
+import com.parking.planb.ctrl.ParkingController;
 
 public class Router {
     private final String PARKCMD="1";
@@ -9,6 +11,12 @@ public class Router {
     public static final String MAINPAGE="main";
 
     private String currentPage=MAINPAGE;
+    private ParkingController controller;
+
+    public Router(ParkingController controller) {
+        this.controller = controller;
+
+    }
 
     public String getCurrentPage() {
         return currentPage;
@@ -26,5 +34,10 @@ public class Router {
         }else {
             this.currentPage=command;
         }
+    }
+
+    public void nevigate(Request request) {
+        setCurrentPageByCmd(request.getCommand());
+
     }
 }

@@ -5,10 +5,10 @@ import java.util.Scanner;
 import static org.fusesource.jansi.Ansi.Color.*;
 import static org.fusesource.jansi.Ansi.ansi;
 
-public class ViewListener {
+public class Viewer {
     private Scanner scanner;
 
-    public ViewListener() {
+    public Viewer() {
         this.scanner = new Scanner(System.in);
     }
 

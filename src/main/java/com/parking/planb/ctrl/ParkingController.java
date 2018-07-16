@@ -1,11 +1,12 @@
-package com.parking.tdd.ctrl;
+package com.parking.planb.ctrl;
 
-import com.parking.tdd.core.Car;
-import com.parking.tdd.core.ParkingBoy;
-import com.parking.tdd.core.ParkingCard;
-import com.parking.tdd.core.exception.AllParkingLotsFullException;
-import com.parking.tdd.core.exception.InvalidParkingCardException;
-import com.parking.tdd.view.Viewer;
+import com.parking.planb.core.Car;
+import com.parking.planb.core.ParkingBoy;
+import com.parking.planb.core.ParkingCard;
+import com.parking.planb.core.exception.AllParkingLotsFullException;
+import com.parking.planb.core.exception.InvalidParkingCardException;
+import com.parking.planb.view.Router;
+import com.parking.planb.view.Viewer;
 
 public class ParkingController {
     private final String END="end";
@@ -49,28 +50,40 @@ public class ParkingController {
     }
 
     public void start() {
-        while (true){
-            listener.showMainPage();
-            String msg=listener.recept();
-            try {
-                if (msg.equals(END)) {
-                    return;
-                }else if (msg.equals(PARK)){
-                    handleParkingCommand();
-                }else if (msg.equals(PICK)){
-                    handleUnParkingCommand();
-                }else {
-                    listener.send("非法指令，请查证后再输");
-                }
-            }catch (AllParkingLotsFullException exception){
-                listener.send("车已停满，请晚点再来");
-            }catch (InvalidParkingCardException exception){
-                listener.send("非法小票，无法取出车，请查证后再输");
+        listener.showMainPage();
+        String msg=listener.recept();
+        try {
+            if (msg.equals(END)) {
+                return;
+            }else if (msg.equals(PARK)){
+                handleParkingCommand();
+            }else if (msg.equals(PICK)){
+                handleUnParkingCommand();
+            }else {
+                listener.send("非法指令，请查证后再输");
             }
+        }catch (AllParkingLotsFullException exception){
+            listener.send("车已停满，请晚点再来");
+        }catch (InvalidParkingCardException exception){
+            listener.send("非法小票，无法取出车，请查证后再输");
         }
     }
 
 
+    public void handlePage(Router router){
+        String currentPage=router.getCurrentPage();
+        if (currentPage.equals(Router.MAINPAGE)){
+            handleMianPage();
+        }else if(currentPage.equals(Router.PARKPAGE)){
+            handleParkPage();
+        }else if (currentPage.equals(Router.UNPARKPAGE)){
+            handleUnparkPage();
+        }else {
+            listener.send("非法指令，请查证后再输");
+        }
+        router.setCurrentPage(Router.MAINPAGE);
+
+    }
 
     private void handleUnparkPage() {
         try {
