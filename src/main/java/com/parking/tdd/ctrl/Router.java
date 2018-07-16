@@ -13,46 +13,31 @@ public class Router {
     public final String MAINPAGE = "main";
     public final String ERRORPAGE = "error";
 
-
     private String currentPage = MAINPAGE;
     private ParkingController controller;
 
     public Router(ParkingController controller) {
         this.controller = controller;
-        controller.mainPage();
-
     }
 
-    public String getCurrentPage() {
-        return currentPage;
-    }
-
-    public void setCurrentPage(String currentPage) {
-        this.currentPage = currentPage;
-    }
-
-    public void setCurrentPageByCmd(String command) {
-        if (command.equals(PARKCMD)) {
-            this.currentPage = PARKPAGE;
-        } else if (command.equals(UNPARKCMD)) {
-            this.currentPage = UNPARKPAGE;
-        }else if (command.equals(MAINPAGE)) {
-            this.currentPage = MAINPAGE;
-        } else {
-            this.currentPage = ERRORPAGE;
+    public void showPageByCmd(String cmd){
+        switch (cmd){
+            case PARKCMD:
+                this.currentPage = PARKPAGE;
+                controller.parkingPage();
+                break;
+            case UNPARKCMD:
+                this.currentPage = UNPARKPAGE;
+                controller.unparkingPage();
+                break;
+            default:
+                this.currentPage = ERRORPAGE;
+                controller.errorPage();
+                break;
         }
     }
 
-    private void showPage(){
-        switch (currentPage){
-            case PARKPAGE:controller.parkingPage();break;
-            case UNPARKPAGE:controller.unparkingPage();break;
-            case MAINPAGE:controller.mainPage();break;
-            default:controller.errorPage();break;
-        }
-    }
-
-    private void handlePage(){
+    public void handlePage(){
         if (currentPage.equals(PARKPAGE)) {
             controller.handleParking();
         } else if (currentPage.equals(UNPARKPAGE)) {
@@ -61,16 +46,17 @@ public class Router {
     }
 
     public void nevigate(Request request) {
-        setCurrentPageByCmd(request.getCommand());
+        String cmd=request.getCommand();
         try {
-            showPage();
+            showPageByCmd(cmd);
             handlePage();
         }catch (AllParkingLotsFullException e){
         }finally {
-            currentPage=MAINPAGE;
             controller.mainPage();
         }
-
     }
 
+    public void setCurrentPage(String page) {
+        this.currentPage=page;
+    }
 }

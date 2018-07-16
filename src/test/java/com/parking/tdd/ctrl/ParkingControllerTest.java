@@ -149,49 +149,4 @@ public class ParkingControllerTest {
         controller.handleUnparking();
         verify(response).send("非法小票，无法取出车，请查证后再输");
     }
-//
-//    @Test
-//    public void should_pick_specific_car_when_give_its_parking_card_number_from() {
-//        //give
-//        Viewer listener = mock(Viewer.class);
-//        ParkingBoy boy = mock(ParkingBoy.class);
-//        ParkingController controller = new ParkingController(listener, boy);
-//        String cardId = UUID.randomUUID().toString();
-//        Car car = new Car("1234");
-//        ParkingCard card = new ParkingCard(cardId);
-//
-//        //when
-//        when(listener.recept()).thenReturn("1","1234","2",cardId,"end");
-//        when(boy.park(car)).thenReturn(card);
-//
-//        when(boy.isAllParkingLotsFull()).thenReturn(false);
-//        when(boy.unPark(card)).thenReturn(car);
-//
-//        controller.start();
-//
-//        //then
-//        verify(boy).park(car);
-//        verify(boy).unPark(card);
-//        verify(listener).send(String.format("停车成功，您的小票是：\n%s",cardId));
-//        verify(listener).send("车已取出，您的车牌号是: 1234");
-//
-//    }
-//
-//    @Test
-//    public void should_alarm_first_when_all_parking_lots_are_full_not_ask_for_a_car_number() {
-//        //give
-//        Viewer listener = mock(Viewer.class);
-//        ParkingBoy boy = mock(ParkingBoy.class);
-//        ParkingController controller = new ParkingController(listener, boy);
-//
-//        //when
-//        when(listener.recept()).thenReturn("1","end");
-//        when(boy.isAllParkingLotsFull()).thenReturn(true);
-//
-//        controller.start();
-//
-//        //then
-//        verify(listener).send("车已停满，请晚点再来");
-//
-//    }
 }
