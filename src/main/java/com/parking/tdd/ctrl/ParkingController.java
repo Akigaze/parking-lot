@@ -53,7 +53,8 @@ public class ParkingController {
         String id=request.receive();
         ParkingCard card=transformer.convertToParkingCard(id);
         try{
-            String carId= transformer.convertToCarId(boy.unPark(card));
+            Car car=boy.unPark(card);
+            String carId= transformer.convertToCarId(car);
             response.send(String.format("车已取出，您的车牌号是: %s",carId));
         }catch (InvalidParkingCardException e){
             response.send("非法小票，无法取出车，请查证后再输");
