@@ -6,8 +6,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ParkingLot {
+    private int id;
+    private String name;
     private int capacity;
     private Map<ParkingCard,Car> parkedCars=new HashMap<>();
+    private static int idCount=0;
+    public ParkingLot(String name, int capacity) {
+        this.id = ++idCount;
+        this.name = name;
+        this.capacity = capacity;
+    }
 
     public ParkingLot(int capacity) {
         this.capacity = capacity;
@@ -28,12 +36,6 @@ public class ParkingLot {
     }
 
     public Car unpark(ParkingCard card) {
-//        for (ParkingCard c:parkedCars.keySet()){
-//            if (c.equals(card)){
-//                return parkedCars.remove(c);
-//            }
-//        }
-//        return null;
         return parkedCars.remove(card);
     }
 
@@ -42,13 +44,22 @@ public class ParkingLot {
     }
 
     public boolean containsParkingCard(ParkingCard card){
-//        for (ParkingCard c:parkedCars.keySet()){
-//            if (c.equals(card)){
-//                return true;
-//            }
-//        }
-//        return false;
         return parkedCars.containsKey(card);
     }
 
+    public String getId() {
+        return String.format("%03d",id);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public int countCarNum() {
+        return parkedCars.size();
+    }
 }
