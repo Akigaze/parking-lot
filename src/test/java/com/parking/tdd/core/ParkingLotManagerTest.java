@@ -1,6 +1,7 @@
 package com.parking.tdd.core;
 
 import com.parking.tdd.core.exception.DeleteParkingLotWithCarException;
+import com.parking.tdd.core.exception.NotExitParkingLotException;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -60,7 +61,7 @@ public class ParkingLotManagerTest {
     }
 
     @Test
-    public void should_successfully_delete_a_empty_parking_lot_when_call_deleteParkingLotById() throws DeleteParkingLotWithCarException {
+    public void should_successfully_delete_a_empty_parking_lot_when_call_deleteParkingLotById() throws DeleteParkingLotWithCarException, NotExitParkingLotException {
         //give
         ParkingBoy boy=mock(ParkingBoy.class);
         List<ParkingLot> lotList=new ArrayList<>();
@@ -94,9 +95,31 @@ public class ParkingLotManagerTest {
             fail("THE PARKING LOT HAS CARS,CAN'T BE DELETED!");
         }catch (DeleteParkingLotWithCarException e){
             assertThat(lotList.contains(lot1),is(true));
+        } catch (NotExitParkingLotException e) {
+            fail("THE CAR NOT EXIT!");
         }
         //then
-
     }
 
+    @Test
+    public void should_failly_delete_a_parking_not_existent_when_call_deleteParkingLotById(){
+        //give
+        ParkingBoy boy=mock(ParkingBoy.class);
+        List<ParkingLot> lotList=new ArrayList<>();
+        ParkingLot lot1=new ParkingLot(1,"软件园停车场",2);
+
+        lotList.add(lot1);
+        ParkingLotManager manager=new ParkingLotManager(boy,lotList);
+
+        //when
+        try {
+            manager.deleteParkingLotById(2);
+            fail("THE CAR NOT EXIT!");
+        }catch (NotExitParkingLotException e){
+            assertThat(lotList.contains(lot1),is(true));
+        } catch (DeleteParkingLotWithCarException e) {
+            fail("THE PARKING LOT HAS CARS,CAN'T BE DELETED!");
+        }
+        //then
+    }
 }
