@@ -20,6 +20,10 @@ public class Router {
         this.controller = controller;
     }
 
+    public void launch(){
+        controller.mainPage();
+    }
+
     public void showPageByCmd(String cmd){
         switch (cmd){
             case PARKCMD:

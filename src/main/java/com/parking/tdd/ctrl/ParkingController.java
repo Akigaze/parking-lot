@@ -28,7 +28,7 @@ public class ParkingController {
         response.send("非法指令，请查证后再输");
     }
 
-    public void parkingPage() {
+    public void parkingPage() throws AllParkingLotsFullException{
         if (boy.isAllParkingLotsFull()){
             response.send("车已停满，请晚点再来");
             throw new AllParkingLotsFullException();

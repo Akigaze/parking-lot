@@ -23,7 +23,7 @@ public class ParkingMain {
 
         Scanner scanner=new Scanner(System.in);
         Router router=new Router(controller);
-
+        router.launch();
         while (true){
             String cmd=scanner.nextLine();
             request.setCommand(cmd);
