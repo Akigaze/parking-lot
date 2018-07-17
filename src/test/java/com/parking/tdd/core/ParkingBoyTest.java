@@ -2,7 +2,9 @@ package com.parking.tdd.core;
 
 
 import com.parking.tdd.core.exception.AllParkingLotsFullException;
+import com.parking.tdd.core.exception.DeleteParkingLotWithCarException;
 import com.parking.tdd.core.exception.InvalidParkingCardException;
+import com.parking.tdd.core.exception.NotExitParkingLotException;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -201,6 +203,112 @@ public class ParkingBoyTest {
         }catch (InvalidParkingCardException exception){
 
         }
+    }
+
+    @Test
+    public void should_show_message_of_all_the_parking_lots_when_call_getParkingLotsInfo(){
+        //give;
+        List<ParkingLot> lotList=new ArrayList<>();
+        ParkingLot lot1=mock(ParkingLot.class);
+        ParkingLot lot2=mock(ParkingLot.class);
+        lotList.add(lot1);
+        lotList.add(lot2);
+
+        ParkingBoy boy=new ParkingBoy(lotList);
+        String except="|停车场ID|名称|车位|已停车辆|剩余车位|\n" +
+                "======================================\n" +
+                "|001|软件园停车场|2(个)|2(辆)|0(个)|\n" +
+                "|002|唐家湾停车场|2(个)|1(辆)|1(个)|\n" +
+                "\n" +
+                "总车位：4(个)\n" +
+                "停车总量：3（辆）\n" +
+                "总剩余车位：1（个）";
+
+        //when
+        when(lot1.getId()).thenReturn("001");
+        when(lot2.getId()).thenReturn("002");
+        when(lot1.getName()).thenReturn("软件园停车场");
+        when(lot2.getName()).thenReturn("唐家湾停车场");
+        when(lot1.getCapacity()).thenReturn(2);
+        when(lot2.getCapacity()).thenReturn(2);
+        when(lot1.getCarNum()).thenReturn(2);
+        when(lot2.getCarNum()).thenReturn(1);
+
+        //then
+        String info=boy.getParkingLotsInfo();
+        assertThat(info,is(except));
+    }
+
+    @Test
+    public void should_add_a_parking_lot_when_call_buildParkingLot(){
+        //give
+        List<ParkingLot> lotList=new ArrayList<>();
+        String name="唐家湾停车场";
+        int capacity=2;
+        ParkingBoy boy=new ParkingBoy(lotList);
+
+        //when
+        boy.buildParkingLot(name,capacity);
+
+        //then
+        assertThat(lotList.get(0).getName(),is(name));
+        assertThat(lotList.get(0).getCapacity(),is(capacity));
+    }
+
+    @Test
+    public void should_successfully_delete_a_empty_parking_lot_when_call_deleteParkingLot() {
+        //give
+        List<ParkingLot> lotList=new ArrayList<>();
+        ParkingLot lot1=mock(ParkingLot.class);
+
+        lotList.add(lot1);
+        ParkingBoy boy=new ParkingBoy(lotList);
+
+        //when
+        when(lot1.hasCar()).thenReturn(false);
+        boolean succee=boy.deleteParkingLot(lot1);
+
+        //then
+        assertThat(succee,is(true));
+        assertThat(lotList.contains(lot1),is(false));
+    }
+
+    @Test
+    public void should_failly_delete_a_parking_lot_with_cars_when_call_deleteParkingLot(){
+        //give
+        List<ParkingLot> lotList=new ArrayList<>();
+        ParkingLot lot1=mock(ParkingLot.class);
+
+        lotList.add(lot1);
+        ParkingBoy boy=new ParkingBoy(lotList);
+
+        //when
+        when(lot1.hasCar()).thenReturn(true);
+        boolean succee=boy.deleteParkingLot(lot1);
+
+        //then
+        assertThat(succee,is(false));
+        assertThat(lotList.contains(lot1),is(true));
+    }
+
+    @Test
+    public void should_failly_delete_a_parking_not_existent_when_call_deleteParkingLot(){
+        //give
+        List<ParkingLot> lotList=new ArrayList<>();
+        ParkingLot lot1=mock(ParkingLot.class);
+
+        lotList.add(lot1);
+        ParkingBoy boy=new ParkingBoy(lotList);
+
+        //when
+        //then
+        try {
+            boolean succee=boy.deleteParkingLot(new ParkingLot());
+            fail("The Parking Lot Is Not Exit!");
+        }catch (NotExitParkingLotException e){
+            assertThat(lotList.contains(lot1),is(true));
+        }
+
 
     }
 }

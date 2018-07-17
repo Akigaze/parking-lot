@@ -11,7 +11,6 @@ public class ParkingLot {
     private String name;
     private int capacity;
     private Map<ParkingCard,Car> parkedCars=new HashMap<>();
-    private static int idCount=0;
 
     public ParkingLot(){}
 
@@ -20,9 +19,7 @@ public class ParkingLot {
     }
 
     public ParkingLot(String name, int capacity) {
-        this.id = ++idCount;
-        this.name = name;
-        this.capacity = capacity;
+        this((int)(Math.random()*100),name,capacity);
     }
 
     public ParkingLot(int id, String name, int capacity) {
@@ -31,18 +28,20 @@ public class ParkingLot {
         this.capacity=capacity;
     }
 
-    public static ParkingLot getInstance(int id){
-        ParkingLot lot=new ParkingLot();
-        lot.setId(id);
-        return lot;
+    public String getId() {
+        return String.format("%03d",id);
     }
 
-    private void setId(int id) {
-        this.id=id;
+    public String getName() {
+        return name;
     }
 
-    public Map<ParkingCard,Car> getParkedCars() {
-        return this.parkedCars;
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public int getCarNum() {
+        return parkedCars.size();
     }
 
     public ParkingCard park(Car car) {
@@ -67,21 +66,7 @@ public class ParkingLot {
         return parkedCars.containsKey(card);
     }
 
-    public String getId() {
-        return String.format("%03d",id);
-    }
 
-    public String getName() {
-        return name;
-    }
-
-    public int getCapacity() {
-        return capacity;
-    }
-
-    public int countCarNum() {
-        return parkedCars.size();
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -93,7 +78,11 @@ public class ParkingLot {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(id);
+    }
+
+
+    public boolean hasCar() {
+        return getCarNum()>0;
     }
 }

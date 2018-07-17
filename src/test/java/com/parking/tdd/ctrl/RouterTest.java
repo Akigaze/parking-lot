@@ -1,19 +1,9 @@
 package com.parking.tdd.ctrl;
 
-import com.parking.tdd.core.Car;
-import com.parking.tdd.core.ParkingBoy;
-import com.parking.tdd.core.ParkingCard;
-import com.parking.tdd.core.exception.AllParkingLotsFullException;
-import com.parking.tdd.core.exception.InvalidParkingCardException;
+
 import com.parking.tdd.view.Request;
-import com.parking.tdd.view.Response;
 import org.junit.Test;
 
-import java.util.UUID;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.*;
 
 public class RouterTest {
