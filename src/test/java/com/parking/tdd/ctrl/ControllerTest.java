@@ -92,4 +92,18 @@ public class ControllerTest {
         //then
         verify(respons).send("请输入小票编号：");
     }
+
+    @Test
+    public void should_show_error_msg_and_back_to_root_when_ask_a_wrong_path(){
+        //give
+        Response respons=mock(Response.class);
+        ErrorController controller=new ErrorController(respons);
+
+        //when
+        String forward=controller.process();
+
+        //then
+        assertThat(forward,is("forward:root"));
+        verify(respons).send("非法指令，请查证后再输");
+    }
 }
