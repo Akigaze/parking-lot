@@ -17,13 +17,29 @@ public class ControllerTest {
     public void should_show_parking_sevice_page_when_ask_path_root_1_to_MainController(){
         //give
         Response respons=mock(Response.class);
-        MainController controller=new MainController(respons);
-        String path="root/1";
+        Request request=mock(Request.class);
+        MainController controller=new MainController(request,respons);
 
         //when
-        controller.process(path);
+        when(request.getCommand()).thenReturn("1");
+        controller.process();
 
         //then
         verify(respons).send("1. 停车\n2. 取车\n请输入您要进行的操作：");
+    }
+
+    @Test
+    public void should_show_parking_lot_management_page_when_ask_path_root_2_to_MainController(){
+        //give
+        Response respons=mock(Response.class);
+        Request request=mock(Request.class);
+        MainController controller=new MainController(request,respons);
+
+        //when
+        when(request.getCommand()).thenReturn("2");
+        controller.process();
+
+        //then
+        verify(respons).send("1. 查看停车场详情\n2. 添加停车场\n3. 删除停车场");
     }
 }

@@ -11,7 +11,7 @@ public class RootController extends NomalController {
     }
 
     @Override
-    public String process(String requestPath) {
+    public String process() {
         String rootPage="1.停车服务\n2.停车场管理\n请输入您要进入的页面：";
         System.out.println(rootPage);
         return "";

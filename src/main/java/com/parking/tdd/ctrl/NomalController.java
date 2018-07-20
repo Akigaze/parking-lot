@@ -7,5 +7,4 @@ import com.parking.tdd.view.Response;
 public abstract class NomalController implements BasicController {
     protected Response response;
     protected Request request;
-    protected ParkingBoy boy;
 }
