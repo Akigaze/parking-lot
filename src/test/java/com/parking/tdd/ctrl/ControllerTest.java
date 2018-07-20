@@ -106,4 +106,24 @@ public class ControllerTest {
         assertThat(forward,is("forward:root"));
         verify(respons).send("非法指令，请查证后再输");
     }
+
+    @Test
+    public void should_park_a_car_when_give_a_car_number_by_ParkController(){
+        //give
+        Response respons=mock(Response.class);
+        Request request=mock(Request.class);
+        ParkingBoy boy=mock(ParkingBoy.class);
+        Car car=new Car("12345");
+        ParkingCard card=new ParkingCard("000999888777");
+        ParkController controller=new ParkController(request,respons,boy);
+
+        //when
+        when(request.getCommand()).thenReturn("12345");
+        when(boy.park(car)).thenReturn(card);
+        String forward=controller.process();
+
+        //then
+        assertThat(forward,is("forward:root"));
+        verify(respons).send("停车成功，您的小票是：\n000999888777");
+    }
 }
