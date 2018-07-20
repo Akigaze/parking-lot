@@ -9,8 +9,11 @@ import com.parking.tdd.view.Request;
 import com.parking.tdd.view.Response;
 import org.junit.Test;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 
 public class ControllerTest {
     @Test
@@ -41,5 +44,38 @@ public class ControllerTest {
 
         //then
         verify(respons).send("1. 查看停车场详情\n2. 添加停车场\n3. 删除停车场");
+    }
+
+    @Test
+    public void should_into_parking_page_when_ask_path_root_1_1_to_GotoParkController(){
+        //give
+        Response respons=mock(Response.class);
+        Request request=mock(Request.class);
+        ParkingBoy boy=mock(ParkingBoy.class);
+        GotoParkController controller=new GotoParkController(request,respons,boy);
+
+        //when
+        when(boy.isAllParkingLotsFull()).thenReturn(false);
+        controller.process();
+
+        //then
+        verify(respons).send("请输入车牌号: ");
+    }
+
+    @Test
+    public void should_show_lot_full_and_back_to_root_page_when_ask_path_root_1_1_to_GotoParkController(){
+        //give
+        Response respons=mock(Response.class);
+        Request request=mock(Request.class);
+        ParkingBoy boy=mock(ParkingBoy.class);
+        GotoParkController controller=new GotoParkController(request,respons,boy);
+
+        //when
+        when(boy.isAllParkingLotsFull()).thenReturn(true);
+        String forward=controller.process();
+
+        //then
+        assertThat(forward,is("forward:root"));
+        verify(respons).send("车已停满，请晚点再来");
     }
 }
