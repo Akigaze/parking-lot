@@ -126,4 +126,44 @@ public class ControllerTest {
         assertThat(forward,is("forward:root"));
         verify(respons).send("停车成功，您的小票是：\n000999888777");
     }
+
+    @Test
+    public void should_pick_a_car_when_give_a_right_parkingcard_number_by_UnoarkController(){
+        //give
+        Response respons=mock(Response.class);
+        Request request=mock(Request.class);
+        ParkingBoy boy=mock(ParkingBoy.class);
+        Car car=new Car("12345");
+        ParkingCard card=new ParkingCard("000999888777");
+        UnoarkController controller=new UnoarkController(request,respons,boy);
+
+        //when
+        when(request.getCommand()).thenReturn("000999888777");
+        when(boy.unPark(card)).thenReturn(car);
+        String forward=controller.process();
+
+        //then
+        assertThat(forward,is("forward:root"));
+        verify(respons).send("车已取出，您的车牌号是: 12345");
+    }
+
+    @Test
+    public void should_show_error_msg_and_back_to_root_page_when_give_a_wrong_parkingcard_number_by_UnoarkController(){
+        //give
+        Response respons=mock(Response.class);
+        Request request=mock(Request.class);
+        ParkingBoy boy=mock(ParkingBoy.class);
+        Car car=new Car("12345");
+        ParkingCard card=new ParkingCard("000999888777");
+        UnoarkController controller=new UnoarkController(request,respons,boy);
+
+        //when
+        when(request.getCommand()).thenReturn("000999888777");
+        when(boy.unPark(card)).thenThrow(new InvalidParkingCardException());
+        String forward=controller.process();
+
+        //then
+        assertThat(forward,is("forward:root"));
+        verify(respons).send("非法小票，无法取出车，请查证后再输");
+    }
 }
