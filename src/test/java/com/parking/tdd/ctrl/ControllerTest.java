@@ -78,4 +78,18 @@ public class ControllerTest {
         assertThat(forward,is("forward:root"));
         verify(respons).send("车已停满，请晚点再来");
     }
+
+    @Test
+    public void should_into_unpark_page_when_ask_path_root_1_2_to_GotoUnparkController(){
+        //give
+        Response respons=mock(Response.class);
+        Request request=mock(Request.class);
+        GotoUnparkController controller=new GotoUnparkController(respons);
+
+        //when
+        String forward=controller.process();
+
+        //then
+        verify(respons).send("请输入小票编号：");
+    }
 }
