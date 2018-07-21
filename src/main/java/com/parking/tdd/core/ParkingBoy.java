@@ -67,8 +67,8 @@ public class ParkingBoy {
         return parkingLotList.stream().map(lot->lot.getCapacity()).reduce(0,(total,current)->total+current);
     }
 
-    public void buildParkingLot(String name, int capacity) {
-        parkingLotList.add(new ParkingLot(parkingLotList.size()+1,name,capacity));
+    public boolean buildParkingLot(String name, int capacity) {
+        return parkingLotList.add(new ParkingLot(parkingLotList.size()+1,name,capacity));
     }
 
     public boolean deleteParkingLot(ParkingLot lot) {

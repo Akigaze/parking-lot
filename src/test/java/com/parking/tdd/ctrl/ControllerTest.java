@@ -223,4 +223,45 @@ public class ControllerTest {
         //then
         verify(respons).send("请输入需要删除的被管理停车场ID: ");
     }
+
+    @Test
+    public void should_add_a_parking_lot_successfully_when_give_a_lot_id_never_used_to_BuildParkingLotController(){
+        //give
+        Response respons=mock(Response.class);
+        Request request=mock(Request.class);
+        ParkingBoy boy=mock(ParkingBoy.class);
+        BuildParkingLotController controller=new BuildParkingLotController(request,respons,boy);
+
+        //when
+        when(request.getCommand()).thenReturn("软件园停车场，2");
+        when(boy.buildParkingLot("软件园停车场",2)).thenReturn(true);
+        String forward=controller.process();
+
+        //then
+        assertThat(forward,is("forward:root"));
+        verify(respons).send("停车场添加成功！");
+    }
+
+    @Test
+    public void should_add_failly_when_give_a_wrong_msg_of_lot_to_BuildParkingLotController(){
+        //give
+        Response respons=mock(Response.class);
+        Request request=mock(Request.class);
+        ParkingBoy boy=mock(ParkingBoy.class);
+        BuildParkingLotController controller=new BuildParkingLotController(request,respons,boy);
+
+        //when
+        when(request.getCommand()).thenReturn("软件园停车场ggdfdgdf","软件园停车场，dfdgdf");
+        String forward1=controller.process();
+
+        //then
+        assertThat(forward1,is("forward:root"));
+        verify(respons).send("停车场信息有误，请确认后重新输入！");
+
+        String forward2=controller.process();
+
+        //then
+        assertThat(forward2,is("forward:root"));
+        verify(respons).send("停车场车位信息有误，请确认后重新输入！");
+    }
 }
