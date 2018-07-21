@@ -28,6 +28,12 @@ public class ParkingLot {
         this.capacity=capacity;
     }
 
+    public static ParkingLot createParkingLot(int id) {
+        ParkingLot lot=new ParkingLot();
+        lot.id=id;
+        return lot;
+    }
+
     public String getId() {
         return String.format("%03d",id);
     }

@@ -3,8 +3,10 @@ package com.parking.tdd.ctrl;
 import com.parking.tdd.core.Car;
 import com.parking.tdd.core.ParkingBoy;
 import com.parking.tdd.core.ParkingCard;
+import com.parking.tdd.core.ParkingLot;
 import com.parking.tdd.core.exception.AllParkingLotsFullException;
 import com.parking.tdd.core.exception.InvalidParkingCardException;
+import com.parking.tdd.core.exception.NotExitParkingLotException;
 import com.parking.tdd.view.Request;
 import com.parking.tdd.view.Response;
 import org.junit.Test;
@@ -263,5 +265,79 @@ public class ControllerTest {
         //then
         assertThat(forward2,is("forward:root"));
         verify(respons).send("停车场车位信息有误，请确认后重新输入！");
+    }
+
+    @Test
+    public void should_delete_a_lot_successfully_when_give_a_right_id_of_a_empty_lot_to_DeleteParkingLotController(){
+        //give
+        Response respons=mock(Response.class);
+        Request request=mock(Request.class);
+        ParkingBoy boy=mock(ParkingBoy.class);
+        DeleteParkingLotController controller=new DeleteParkingLotController(request,respons,boy);
+        ParkingLot lot=ParkingLot.createParkingLot(111);
+
+        //when
+        when(request.getCommand()).thenReturn("111");
+        when(boy.deleteParkingLot(lot)).thenReturn(true);
+        String forward1=controller.process();
+
+        //then
+        assertThat(forward1,is("forward:root"));
+        verify(respons).send("停车场删除成功！");
+    }
+
+    @Test
+    public void should_delete_a_lot_failly_when_give_illegal_string_to_DeleteParkingLotController(){
+        //give
+        Response respons=mock(Response.class);
+        Request request=mock(Request.class);
+        ParkingBoy boy=mock(ParkingBoy.class);
+        DeleteParkingLotController controller=new DeleteParkingLotController(request,respons,boy);
+
+        //when
+        when(request.getCommand()).thenReturn("suigg");
+        String forward1=controller.process();
+
+        //then
+        assertThat(forward1,is("forward:root"));
+        verify(respons).send("停车场ID信息有误，请确认后重新输入！");
+    }
+
+    @Test
+    public void should_delete_a_lot_failly_when_give_a_id_never_used_to_DeleteParkingLotController(){
+        //give
+        Response respons=mock(Response.class);
+        Request request=mock(Request.class);
+        ParkingBoy boy=mock(ParkingBoy.class);
+        DeleteParkingLotController controller=new DeleteParkingLotController(request,respons,boy);
+        ParkingLot lot=ParkingLot.createParkingLot(231);
+
+        //when
+        when(request.getCommand()).thenReturn("231");
+        when(boy.deleteParkingLot(lot)).thenThrow(new NotExitParkingLotException());
+        String forward1=controller.process();
+
+        //then
+        assertThat(forward1,is("forward:root"));
+        verify(respons).send("此停车场不存在！");
+    }
+
+    @Test
+    public void should_delete_a_lot_failly_when_give_the_parking_lot_has_any_car_to_DeleteParkingLotController(){
+        //give
+        Response respons=mock(Response.class);
+        Request request=mock(Request.class);
+        ParkingBoy boy=mock(ParkingBoy.class);
+        DeleteParkingLotController controller=new DeleteParkingLotController(request,respons,boy);
+        ParkingLot lot=ParkingLot.createParkingLot(231);
+
+        //when
+        when(request.getCommand()).thenReturn("231");
+        when(boy.deleteParkingLot(lot)).thenReturn(false);
+        String forward1=controller.process();
+
+        //then
+        assertThat(forward1,is("forward:root"));
+        verify(respons).send("此停车场中，依然停有汽车，无法删除！");
     }
 }
