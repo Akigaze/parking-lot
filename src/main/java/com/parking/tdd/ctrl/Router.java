@@ -21,14 +21,25 @@ public class Router {
 
     public void setCurrentPathByRequset() {
         String cmd=request.getCommand();
+        cmd=(cmd=="1"||cmd=="2") ? cmd : "*";
         currentPath+="/"+cmd;
     }
 
     public void processRequest() {
-        String cmd=request.getCommand();
         setCurrentPathByRequset();
         BasicController controller=controllerMap.get(currentPath);
-        controller.process();
+        String ward=controller.process();
+        forward(ward);
+    }
+    private void forward(String ward){
+        if (ward==""){
+            return;
+        }
+        if (ward.contains("forward")){
+            ward=ward.substring(ward.indexOf(":")+1);
+        }
+        controllerMap.get(ward).process();
+        setCurrentPath(initPath);
     }
 
     public void initPage() {

@@ -42,6 +42,8 @@ public class RouterTest {
 
         //when
         when(request.getCommand()).thenReturn("1","2");
+        when(controller.process()).thenReturn("");
+
         router.setCurrentPath("root");
         router.processRequest();
 
@@ -51,5 +53,39 @@ public class RouterTest {
 
         //then
         verify(controller,times(2)).process();
+    }
+
+    @Test
+    public void should_call_process_of_ErrorController_when_call_error_path(){
+        //give
+        Map<String,BasicController> controllerMap=new HashMap<>();
+        Request request=mock(Request.class);
+        Response response=mock(Response.class);
+        BasicController controller=mock(ErrorController.class);
+        BasicController controller2=mock(RootController.class);
+
+        controllerMap.put("root/*",controller);
+        controllerMap.put("root/1/*",controller);
+        controllerMap.put("root/2/*",controller);
+        controllerMap.put("root",controller2);
+
+        Router router=new Router(controllerMap,request);
+
+        //when
+        when(request.getCommand()).thenReturn("xvxc","453","43c");
+        when(controller.process()).thenReturn("forward:root");
+
+        router.setCurrentPath("root");
+        router.processRequest();
+
+        router.setCurrentPath("root/1");
+        router.processRequest();
+
+        router.setCurrentPath("root/1");
+        router.processRequest();
+
+        //then
+        verify(controller,times(3)).process();
+        verify(controller2,times(3)).process();
     }
 }
