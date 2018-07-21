@@ -166,4 +166,61 @@ public class ControllerTest {
         assertThat(forward,is("forward:root"));
         verify(respons).send("非法小票，无法取出车，请查证后再输");
     }
+
+    @Test
+    public void should_show_parkinglot_msg_when_ask_root_2_1_to_ManageController(){
+        //give
+        Response respons=mock(Response.class);
+        Request request=mock(Request.class);
+        ParkingBoy boy=mock(ParkingBoy.class);
+        ManageController controller=new ManageController(request,respons,boy);
+        String info="|停车场ID|名称|车位|已停车辆|剩余车位|\n" +
+                "======================================\n" +
+                "|001|软件园停车场|2(个)|2(辆)|0(个)|\n" +
+                "|002|唐家湾停车场|2(个)|1(辆)|1(个)|\n" +
+                "\n" +
+                "总车位：4(个)\n" +
+                "停车总量：3（辆）\n" +
+                "总剩余车位：1（个）";
+        //when
+        when(request.getCommand()).thenReturn("1");
+        when(boy.getParkingLotsInfo()).thenReturn(info);
+        String forward=controller.process();
+
+        //then
+        assertThat(forward,is("forward:root"));
+        verify(respons).send(info);
+    }
+
+    @Test
+    public void should_go_to_add_a_parking_lot_when_ask_root_2_2_to_ManageController(){
+        //give
+        Response respons=mock(Response.class);
+        Request request=mock(Request.class);
+        ParkingBoy boy=mock(ParkingBoy.class);
+        ManageController controller=new ManageController(request,respons,boy);
+
+        //when
+        when(request.getCommand()).thenReturn("2");
+        String forward=controller.process();
+
+        //then
+        verify(respons).send("请输入你套添加的停车场信息（格式为：名称，车位）：");
+    }
+
+    @Test
+    public void should_go_to_delete_a_parking_lot_when_ask_root_2_3_to_ManageController(){
+        //give
+        Response respons=mock(Response.class);
+        Request request=mock(Request.class);
+        ParkingBoy boy=mock(ParkingBoy.class);
+        ManageController controller=new ManageController(request,respons,boy);
+
+        //when
+        when(request.getCommand()).thenReturn("3");
+        String forward=controller.process();
+
+        //then
+        verify(respons).send("请输入需要删除的被管理停车场ID: ");
+    }
 }
