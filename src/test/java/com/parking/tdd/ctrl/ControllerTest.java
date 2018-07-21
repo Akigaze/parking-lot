@@ -4,7 +4,6 @@ import com.parking.tdd.core.Car;
 import com.parking.tdd.core.ParkingBoy;
 import com.parking.tdd.core.ParkingCard;
 import com.parking.tdd.core.ParkingLot;
-import com.parking.tdd.core.exception.AllParkingLotsFullException;
 import com.parking.tdd.core.exception.InvalidParkingCardException;
 import com.parking.tdd.core.exception.NotExitParkingLotException;
 import com.parking.tdd.view.Request;
@@ -137,7 +136,7 @@ public class ControllerTest {
         ParkingBoy boy=mock(ParkingBoy.class);
         Car car=new Car("12345");
         ParkingCard card=new ParkingCard("000999888777");
-        UnoarkController controller=new UnoarkController(request,respons,boy);
+        UnparkController controller=new UnparkController(request,respons,boy);
 
         //when
         when(request.getCommand()).thenReturn("000999888777");
@@ -157,7 +156,7 @@ public class ControllerTest {
         ParkingBoy boy=mock(ParkingBoy.class);
         Car car=new Car("12345");
         ParkingCard card=new ParkingCard("000999888777");
-        UnoarkController controller=new UnoarkController(request,respons,boy);
+        UnparkController controller=new UnparkController(request,respons,boy);
 
         //when
         when(request.getCommand()).thenReturn("000999888777");

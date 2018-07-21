@@ -7,9 +7,9 @@ import com.parking.tdd.core.exception.InvalidParkingCardException;
 import com.parking.tdd.view.Request;
 import com.parking.tdd.view.Response;
 
-public class UnoarkController extends NomalController{
+public class UnparkController extends NomalController{
     private ParkingBoy boy;
-    public UnoarkController(Request request, Response respons, ParkingBoy boy) {
+    public UnparkController(Request request, Response respons, ParkingBoy boy) {
         this.request=request;
         this.response=respons;
         this.boy=boy;
