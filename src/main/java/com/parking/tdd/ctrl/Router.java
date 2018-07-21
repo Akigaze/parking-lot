@@ -2,26 +2,34 @@ package com.parking.tdd.ctrl;
 
 import com.parking.tdd.view.Request;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Router {
-    private Map<String,BasicController> controllerMap;
+    private Map<String,BasicController> controllerMap=new HashMap<>();
     private Request request;
     private String initPath="root";
     private String currentPath;
 
-    public Router(Map<String, BasicController> controllerMap, Request request) {
-        this.controllerMap=controllerMap;
+    public Router(Request request){
         this.request=request;
+        currentPath=initPath;
     }
 
-    public String getInitPath() {
-        return this.initPath;
+    public Router(Map<String, BasicController> controllerMap, Request request) {
+        this(request);
+        this.controllerMap=controllerMap;
     }
 
     public void setCurrentPathByRequset() {
         String cmd=request.getCommand();
-        cmd=(cmd=="1"||cmd=="2") ? cmd : "*";
+        if (currentPath.equals("root/1")||currentPath.equals("root")){
+            cmd=(cmd.equals("1")||cmd.equals("2")) ? cmd : "*";
+        }else if(currentPath.equals("root/2")){
+            cmd=(cmd.equals("1")||cmd.equals("2")||cmd.equals("3")) ? cmd : "*";
+        }else {
+            cmd="*";
+        }
         currentPath+="/"+cmd;
     }
 
@@ -50,5 +58,9 @@ public class Router {
 
     public void setCurrentPath(String path) {
         this.currentPath=path;
+    }
+
+    public void setControllerMap(Map<String, BasicController> controllerMap) {
+        this.controllerMap=controllerMap;
     }
 }

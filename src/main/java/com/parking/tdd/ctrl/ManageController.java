@@ -15,11 +15,11 @@ public class ManageController extends NomalController {
 
     @Override
     public String process() {
-        if (request.getCommand() == "1") {
+        if (request.getCommand().equals("1")) {
             String info = boy.getParkingLotsInfo();
             response.send(info);
             return "forward:root";
-        }else if(request.getCommand()=="2"){
+        }else if(request.getCommand().equals("2")){
             response.send("请输入你套添加的停车场信息（格式为：名称，车位）：");
             return "";
         }else {

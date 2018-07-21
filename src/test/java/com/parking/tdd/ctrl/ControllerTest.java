@@ -277,7 +277,7 @@ public class ControllerTest {
 
         //when
         when(request.getCommand()).thenReturn("111");
-        when(boy.deleteParkingLot(lot)).thenReturn(true);
+        when(boy.deleteParkingLot(111)).thenReturn(true);
         String forward1=controller.process();
 
         //then
@@ -313,7 +313,7 @@ public class ControllerTest {
 
         //when
         when(request.getCommand()).thenReturn("231");
-        when(boy.deleteParkingLot(lot)).thenThrow(new NotExitParkingLotException());
+        when(boy.deleteParkingLot(231)).thenThrow(new NotExitParkingLotException());
         String forward1=controller.process();
 
         //then
@@ -332,7 +332,7 @@ public class ControllerTest {
 
         //when
         when(request.getCommand()).thenReturn("231");
-        when(boy.deleteParkingLot(lot)).thenReturn(false);
+        when(boy.deleteParkingLot(231)).thenReturn(false);
         String forward1=controller.process();
 
         //then

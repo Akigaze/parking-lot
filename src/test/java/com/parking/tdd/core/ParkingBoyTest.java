@@ -225,8 +225,8 @@ public class ParkingBoyTest {
                 "总剩余车位：1（个）";
 
         //when
-        when(lot1.getId()).thenReturn("001");
-        when(lot2.getId()).thenReturn("002");
+        when(lot1.getIdStr()).thenReturn("001");
+        when(lot2.getIdStr()).thenReturn("002");
         when(lot1.getName()).thenReturn("软件园停车场");
         when(lot2.getName()).thenReturn("唐家湾停车场");
         when(lot1.getCapacity()).thenReturn(2);
@@ -266,7 +266,7 @@ public class ParkingBoyTest {
 
         //when
         when(lot1.hasCar()).thenReturn(false);
-        boolean succee=boy.deleteParkingLot(lot1);
+        boolean succee=boy.deleteParkingLot(lot1.getId());
 
         //then
         assertThat(succee,is(true));
@@ -284,7 +284,7 @@ public class ParkingBoyTest {
 
         //when
         when(lot1.hasCar()).thenReturn(true);
-        boolean succee=boy.deleteParkingLot(lot1);
+        boolean succee=boy.deleteParkingLot(lot1.getId());
 
         //then
         assertThat(succee,is(false));
@@ -303,7 +303,7 @@ public class ParkingBoyTest {
         //when
         //then
         try {
-            boolean succee=boy.deleteParkingLot(new ParkingLot());
+            boolean succee=boy.deleteParkingLot(323232);
             fail("The Parking Lot Is Not Exit!");
         }catch (NotExitParkingLotException e){
             assertThat(lotList.contains(lot1),is(true));

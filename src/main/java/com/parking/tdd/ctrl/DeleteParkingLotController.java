@@ -19,7 +19,7 @@ public class DeleteParkingLotController extends NomalController {
     public String process() {
         try {
             int id = Integer.parseInt(request.getCommand());
-            boolean result = boy.deleteParkingLot(ParkingLot.createParkingLot(id));
+            boolean result = boy.deleteParkingLot(id);
             if (result) {
                 response.send("停车场删除成功！");
             }else{

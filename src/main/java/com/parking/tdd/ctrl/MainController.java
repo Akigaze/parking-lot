@@ -13,7 +13,7 @@ public class MainController extends NomalController{
     @Override
     public String process() {
         String mainPage=null;
-        if (request.getCommand()=="1"){
+        if (request.getCommand().equals("1")){
             mainPage="1. 停车\n2. 取车\n请输入您要进行的操作：";
         }else {
             mainPage="1. 查看停车场详情\n2. 添加停车场\n3. 删除停车场";

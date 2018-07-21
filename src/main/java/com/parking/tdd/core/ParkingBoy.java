@@ -44,7 +44,7 @@ public class ParkingBoy {
         buffer.append("|停车场ID|名称|车位|已停车辆|剩余车位|\n");
         buffer.append("======================================\n");
         parkingLotList.forEach(lot->{
-            String id=lot.getId();
+            String id=lot.getIdStr();
             String name=lot.getName();
             int capacity=lot.getCapacity();
             int carNum=lot.getCarNum();
@@ -71,12 +71,23 @@ public class ParkingBoy {
         return parkingLotList.add(new ParkingLot(parkingLotList.size()+1,name,capacity));
     }
 
-    public boolean deleteParkingLot(ParkingLot lot) {
-        if (!parkingLotList.contains(lot)){
+    private ParkingLot getParkingLotById(int id){
+        ParkingLot deleter = null;
+        for (ParkingLot lot:parkingLotList){
+            if (lot.getId()==id){
+                deleter=lot;
+                break;
+            }
+        }
+        return deleter;
+    }
+    public boolean deleteParkingLot(int id) {
+        ParkingLot deleter=getParkingLotById(id);
+        if (deleter==null){
             throw new NotExitParkingLotException();
         }else {
-            if (!lot.hasCar()){
-                return parkingLotList.remove(lot);
+            if (!deleter.hasCar()){
+                return parkingLotList.remove(deleter);
             }
             return false;
         }
