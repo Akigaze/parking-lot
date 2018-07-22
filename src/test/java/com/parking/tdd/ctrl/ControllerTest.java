@@ -273,7 +273,6 @@ public class ControllerTest {
         Request request=mock(Request.class);
         ParkingBoy boy=mock(ParkingBoy.class);
         DeleteParkingLotController controller=new DeleteParkingLotController(request,respons,boy);
-        ParkingLot lot=ParkingLot.createParkingLot(111);
 
         //when
         when(request.getCommand()).thenReturn("111");
@@ -309,7 +308,6 @@ public class ControllerTest {
         Request request=mock(Request.class);
         ParkingBoy boy=mock(ParkingBoy.class);
         DeleteParkingLotController controller=new DeleteParkingLotController(request,respons,boy);
-        ParkingLot lot=ParkingLot.createParkingLot(231);
 
         //when
         when(request.getCommand()).thenReturn("231");
@@ -328,7 +326,6 @@ public class ControllerTest {
         Request request=mock(Request.class);
         ParkingBoy boy=mock(ParkingBoy.class);
         DeleteParkingLotController controller=new DeleteParkingLotController(request,respons,boy);
-        ParkingLot lot=ParkingLot.createParkingLot(231);
 
         //when
         when(request.getCommand()).thenReturn("231");
